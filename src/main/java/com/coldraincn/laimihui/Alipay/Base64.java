@@ -5,8 +5,10 @@ package com.coldraincn.laimihui.Alipay;
  */
 
 
-public final class Base64 {
-
+/**
+ * Created by hd on 16/5/18.
+ */
+public class Base64 {
     private static final int BASELENGTH = 128;
     private static final int LOOKUPLENGTH = 64;
     private static final int TWENTYFOURBITGROUP = 24;
@@ -271,4 +273,3 @@ public final class Base64 {
         return newSize;
     }
 }
-
