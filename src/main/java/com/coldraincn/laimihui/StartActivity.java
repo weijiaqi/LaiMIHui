@@ -26,36 +26,36 @@ public class StartActivity extends AppCompatActivity {
             String token = settings.getString(PREF_CELL, "");
 //
 //
-        Intent intent = new Intent (StartActivity.this,OrderconfirmActivity.class);
-        startActivity(intent);
-        StartActivity.this.finish();
+//        Intent intent = new Intent (StartActivity.this,OrderconfirmActivity.class);
+//        startActivity(intent);
+//        StartActivity.this.finish();
 
 
 
 
-//            if (!"".equals(token)) {
-//                new Handler().postDelayed(new Runnable(){
-//                    public void run(){
-//
-//
-//                        Intent intent = new Intent (StartActivity.this,MainActivity.class);
-//                        startActivity(intent);
-//                        StartActivity.this.finish();
-//                    }
-//                }, 1000);
-//
-//            }
-//            else {
-//                new Handler().postDelayed(new Runnable(){
-//                    public void run(){
-//
-//
-//                        Intent intent = new Intent(StartActivity.this,LoginActivity.class);
-//                        startActivity(intent);
-//                        StartActivity.this.finish();
-//                    }
-//                }, 1000);
-//            }
+            if (!"".equals(token)) {
+                new Handler().postDelayed(new Runnable(){
+                    public void run(){
+
+
+                        Intent intent = new Intent (StartActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        StartActivity.this.finish();
+                    }
+                }, 1000);
+
+            }
+            else {
+                new Handler().postDelayed(new Runnable(){
+                    public void run(){
+
+
+                        Intent intent = new Intent(StartActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                        StartActivity.this.finish();
+                    }
+                }, 1000);
+            }
 
 
         }

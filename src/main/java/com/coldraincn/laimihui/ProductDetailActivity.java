@@ -5,13 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.coldraincn.laimihui.entity.ProductDetail;
-import com.coldraincn.laimihui.presenter.FirstPresenter;
 import com.coldraincn.laimihui.presenter.ProductDetailPresenter;
 import com.coldraincn.laimihui.view.ProductDetailView;
 import com.youth.banner.Banner;
@@ -24,11 +22,16 @@ import butterknife.OnClick;
 import common.GlideImageLoader;
 
 public class ProductDetailActivity extends AppCompatActivity {
+
     public static final String PREFUSER = "USER";
     public static final String PREF_CELL = "CELL";
     public static final String PREF_TOKEN = "TOKEN";
+    private String html="<p><img src=\"http://dev.wecity.co/task/ueditor/readImage.do?path=/home/thinker/wwwroot/dev.wecity.co/upload/image/20170904/1504509989015007053.jpg\" title=\"1504509989015007053.jpg\" style=\"width:100%;\" alt=\"微信图片_20170831101644.jpg\"/></p>";
+    @BindView(R.id.web)
+    WebView web;
     private String token;
     private String productOid;
+    private ProductDetail mProductDetail;
 
     @BindView(R.id.banner)
     Banner banner;
@@ -38,42 +41,51 @@ public class ProductDetailActivity extends AppCompatActivity {
     TextView textView5;
     @BindView(R.id.textView7)
     TextView textView7;
-    @BindView(R.id.rv1)
-    RecyclerView rv1;
     @BindView(R.id.paybutton)
     Button paybutton;
+
     @OnClick(R.id.paybutton)
     public void order() {
-        Intent intent = new Intent (ProductDetailActivity.this,OrderconfirmActivity.class);
+        Intent intent = new Intent(ProductDetailActivity.this, OrderconfirmActivity.class);
+
+        Bundle bundle = new Bundle();
+
+        bundle.putSerializable("productDetail", mProductDetail);
+        bundle.putString("num","1");
+
+
+        intent.putExtras(bundle);
         startActivity(intent);
         this.finish();
     }
 
 
-
-    private ProductDetailPresenter mProductDetailPresenter= new ProductDetailPresenter(this);
+   private ProductDetailPresenter mProductDetailPresenter = new ProductDetailPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
         ButterKnife.bind(this);
-        /////////获取数据
+       //web.loadData(getHtmlData(html), "text/html; charset=UTF-8", null);
+//        /////////获取数据
         SharedPreferences settings = getSharedPreferences(PREFUSER, 0);
         token = settings.getString(PREF_TOKEN, "");
         Bundle bundle = this.getIntent().getExtras();
 
         productOid = bundle.getString("productOid");
-       // textViewname.setText(productOid);
+        // textViewname.setText(productOid);
         mProductDetailPresenter.onCreate();
         mProductDetailPresenter.attachView(mProductDetailView);
-        mProductDetailPresenter.productDetail(token,productOid);
-       // mProductDetailPresenter.productDetail("f74c0b1ac19c482e8a2364cf80e98296","533840800783484");
+        mProductDetailPresenter.productDetail(token, productOid);
+       //  mProductDetailPresenter.productDetail(token,"533840800783484");
 
     }
-    private ProductDetailView mProductDetailView=new ProductDetailView() {
+
+    private ProductDetailView mProductDetailView = new ProductDetailView() {
         @Override
         public void onSuccess(ProductDetail data) {
+            mProductDetail=data;
             //设置图片加载器
             banner.setImageLoader(new GlideImageLoader());
             //设置图片集合
@@ -89,8 +101,10 @@ public class ProductDetailActivity extends AppCompatActivity {
             banner.start();
 
             textViewname.setText(data.getData().getProductName());
-            textView5.setText(String.valueOf(data.getData().getShowSalePrice())+"元");
-            textView7.setText("限购"+String.valueOf(data.getData().getProductQuota())+"份");
+            textView5.setText(String.valueOf(data.getData().getShowSalePrice()) + "元");
+            textView7.setText("限购" + String.valueOf(data.getData().getProductQuota()) + "份");
+         //  web.loadData(getHtmlData(html), "text/html; charset=UTF-8", null);
+           web.loadData(getHtmlData(data.getData().getProductInfo()), "text/html; charset=UTF-8", null);
         }
 
         @Override
@@ -98,4 +112,12 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         }
     };
+
+    private String getHtmlData(String bodyHTML) {
+        String head = "<head>" +
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> " +
+                "<style>img{max-width: 100%; width:auto; height:auto;}</style>" +
+                "</head>";
+        return "<html>" + head + "<body>" + bodyHTML + "</body></html>";
+    }
 }

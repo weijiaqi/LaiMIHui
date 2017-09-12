@@ -1,14 +1,18 @@
 package com.coldraincn.laimihui.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by hd on 2017/9/10.
  */
 
-public class createOrder {
+public class createOrder implements Serializable {
+    private static final long serialVersionUID = 1L;
+
 
     /**
      * status : OK
-     * data : {"body":"补拍邮费","money":"50","orderNo":"1504682201568","payNotifyUrl":"http://dev.wecity.co/lmhapi/mall/order/wechatPayNotify.do","payType":2}
+     * data : {"appid":"wx3bb6d108dec83903","body":"补拍邮费","money":"10.1","nonceStr":"b294504229c668e750dfcc4ea9617f0a","orderNo":"1505202225894","payNotifyUrl":"http://api.17yun.com.cn/mall/order/aliPayNotify.do","paySign":"81519B699E635A565343A4238DE41931","prepayId":"wx20170912153713f072c15b6c0072182258","receiverAddress":"北京市海淀区中关村南大街","receiverName":"赵宝","receiverPhoneNo":"13522890823","timeStamp":"1505202228405"}
      */
 
     private String status;
@@ -30,20 +34,43 @@ public class createOrder {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
+        private static final long serialVersionUID = 1L;
         /**
+         * appid : wx3bb6d108dec83903
          * body : 补拍邮费
-         * money : 50
-         * orderNo : 1504682201568
-         * payNotifyUrl : http://dev.wecity.co/lmhapi/mall/order/wechatPayNotify.do
-         * payType : 2
+         * money : 10.1
+         * nonceStr : b294504229c668e750dfcc4ea9617f0a
+         * orderNo : 1505202225894
+         * payNotifyUrl : http://api.17yun.com.cn/mall/order/aliPayNotify.do
+         * paySign : 81519B699E635A565343A4238DE41931
+         * prepayId : wx20170912153713f072c15b6c0072182258
+         * receiverAddress : 北京市海淀区中关村南大街
+         * receiverName : 赵宝
+         * receiverPhoneNo : 13522890823
+         * timeStamp : 1505202228405
          */
 
+        private String appid;
         private String body;
         private String money;
+        private String nonceStr;
         private String orderNo;
         private String payNotifyUrl;
-        private int payType;
+        private String paySign;
+        private String prepayId;
+        private String receiverAddress;
+        private String receiverName;
+        private String receiverPhoneNo;
+        private String timeStamp;
+
+        public String getAppid() {
+            return appid;
+        }
+
+        public void setAppid(String appid) {
+            this.appid = appid;
+        }
 
         public String getBody() {
             return body;
@@ -59,6 +86,14 @@ public class createOrder {
 
         public void setMoney(String money) {
             this.money = money;
+        }
+
+        public String getNonceStr() {
+            return nonceStr;
+        }
+
+        public void setNonceStr(String nonceStr) {
+            this.nonceStr = nonceStr;
         }
 
         public String getOrderNo() {
@@ -77,12 +112,52 @@ public class createOrder {
             this.payNotifyUrl = payNotifyUrl;
         }
 
-        public int getPayType() {
-            return payType;
+        public String getPaySign() {
+            return paySign;
         }
 
-        public void setPayType(int payType) {
-            this.payType = payType;
+        public void setPaySign(String paySign) {
+            this.paySign = paySign;
+        }
+
+        public String getPrepayId() {
+            return prepayId;
+        }
+
+        public void setPrepayId(String prepayId) {
+            this.prepayId = prepayId;
+        }
+
+        public String getReceiverAddress() {
+            return receiverAddress;
+        }
+
+        public void setReceiverAddress(String receiverAddress) {
+            this.receiverAddress = receiverAddress;
+        }
+
+        public String getReceiverName() {
+            return receiverName;
+        }
+
+        public void setReceiverName(String receiverName) {
+            this.receiverName = receiverName;
+        }
+
+        public String getReceiverPhoneNo() {
+            return receiverPhoneNo;
+        }
+
+        public void setReceiverPhoneNo(String receiverPhoneNo) {
+            this.receiverPhoneNo = receiverPhoneNo;
+        }
+
+        public String getTimeStamp() {
+            return timeStamp;
+        }
+
+        public void setTimeStamp(String timeStamp) {
+            this.timeStamp = timeStamp;
         }
     }
 }

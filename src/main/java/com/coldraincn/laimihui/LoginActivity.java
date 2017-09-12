@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -106,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = settings.edit();
             editor.putString(PREF_CELL, mUser.getData().getPhone());
             editor.putString(PREF_TOKEN, mUser.getData().getToken());
-            editor.putString(PREF_CID, Double.toString(mUser.getData().getCommunityOid()));
+            editor.putString(PREF_CID, String.valueOf(mUser.getData().getCommunityOid()));
             editor.putString(PREF_USERROLE, String.valueOf(mUser.getData().getUserRole()));
             editor.putString(PREF_IMAGE, mUser.getData().getUserWxHeadimgurl());
             editor.putString(PREF_NAME, mUser.getData().getUserWxNickname());
@@ -125,6 +126,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void oncode(MessageCode result) {
             code=result.getData();
+            Log.e("message",code);
 
         }
     };

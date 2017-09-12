@@ -89,17 +89,20 @@
         <activity android:name=".ProductDetailActivity" />
         <!-- alipay sdk begin -->
 
-        <activity
-            android:name="com.alipay.sdk.app.H5PayActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="behind" />
-        <activity
-            android:name="com.alipay.sdk.auth.AuthActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="behind" />
 
+        <!-- <activity -->
+        <!-- android:name="com.alipay.sdk.app.H5PayActivity" -->
+        <!-- android:configChanges="orientation|keyboardHidden|navigation" -->
+        <!-- android:exported="false" -->
+        <!-- android:screenOrientation="behind" /> -->
+        <!-- <activity -->
+        <!-- android:name="com.alipay.sdk.auth.AuthActivity" -->
+        <!-- android:configChanges="orientation|keyboardHidden|navigation" -->
+        <!-- android:exported="false" -->
+        <!-- android:screenOrientation="behind" /> -->
+
+        <activity android:name=".PayActivity" />
+        <activity android:name=".PaySuccessActivity"></activity>
     </application>
 
 </manifest>

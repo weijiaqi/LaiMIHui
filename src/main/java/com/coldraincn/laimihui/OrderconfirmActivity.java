@@ -1,9 +1,17 @@
 package com.coldraincn.laimihui;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.SyncStateContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -20,11 +28,26 @@ import com.alipay.sdk.app.PayTask;
 import com.coldraincn.laimihui.Alipay.AliSetting;
 import com.coldraincn.laimihui.Alipay.PayResult;
 import com.coldraincn.laimihui.Alipay.SignUtils;
+import com.coldraincn.laimihui.entity.Address;
+import com.coldraincn.laimihui.entity.BindPhone;
+import com.coldraincn.laimihui.entity.MessageCode;
+import com.coldraincn.laimihui.entity.ProductDetail;
+import com.coldraincn.laimihui.entity.createOrder;
+import com.coldraincn.laimihui.presenter.BindcellPresenter;
+import com.coldraincn.laimihui.presenter.OrderconfirmPresenter;
+import com.coldraincn.laimihui.view.BindcellView;
+import com.coldraincn.laimihui.view.OrderconfirmView;
+import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Random;
 
@@ -32,10 +55,31 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
 public class OrderconfirmActivity extends AppCompatActivity {
+    public static final String PREFUSER = "USER";
+    public static final String PREF_CELL = "CELL";
+    public static final String PREF_TOKEN = "TOKEN";
+    public static final String PREF_CID = "CID";
+    public static final String PREF_USERROLE = "USERROLE";
+    public static final String PREF_IMAGE = "IMAGE";
+    public static final String PREF_NAME = "NAME";
+
+    private String token;
+    private String productOid;
+    private String addressOid="000";
+    private String communityOid;
+    private String tradeCount;
+    private String spbillCreateIp;
+    private String freight="0";
+    private String orderRemark;
+
+
     private static final int SDK_PAY_FLAG = 1;
     private String sumprice;
     private int flag = 0;
+    private ProductDetail mProductDetail;
+    private String num;
 
     @BindView(R.id.tv_info_text)
     TextView tvInfoText;
@@ -77,299 +121,133 @@ public class OrderconfirmActivity extends AppCompatActivity {
     Button pay;
 
     @OnClick(R.id.pay)
-    public void orderpay() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(OrderconfirmActivity.this);
-        //builder.setIcon(R.drawable.ic_launcher);
-        builder.setTitle("支付方式");
-        final String[] pay = {"微信支付", "支付宝支付"};
-        //    设置一个单项选择下拉框
-        /**
-         * 第一个参数指定我们要显示的一组下拉单选框的数据集合
-         * 第二个参数代表索引，指定默认哪一个单选框被勾选上，1表示默认'女' 会被勾选上
-         * 第三个参数给每一个单选项绑定一个监听器
-         */
-        builder.setSingleChoiceItems(pay, 0, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0:
-                        flag = 0;
-                        //ToAliPay();
-                        break;
-                    case 1:
-                        flag = 1;
-                        break;
-                }
-                Toast.makeText(OrderconfirmActivity.this, "支付：" + pay[which], Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (flag) {
-                    case 0:
-                        //1.创建微信支付请求
-//                        WechatPayReq wechatPayReq = new WechatPayReq.Builder()
-//                                .with(OrderconfirmActivity.this) //activity实例
-//                                .setAppId(appid) //微信支付AppID
-//                                .setPartnerId(partnerid)//微信支付商户号
-//                                .setPrepayId(prepayid)//预支付码
-////								.setPackageValue(wechatPayReq.get)//"Sign=WXPay"
-//                                .setNonceStr(noncestr)
-//                                .setTimeStamp(timestamp)//时间戳
-//                                .setSign(sign)//签名
-//                                .create();
-//                        //2.发送微信支付请求
-//                        PayAPI.getInstance().sendPayRequest(wechatPayReq);
-                        break;
-                    case 1:
-//                        //1.创建支付宝支付配置
-//                        AliPayAPI.Config config = new AliPayAPI.Config.Builder()
-//                                .setRsaPrivate(AliSetting.RSA_PRIVATE) //设置私钥 (商户私钥，pkcs8格式)
-//                                .setRsaPublic(AliSetting.RSA_PUBLIC)//设置公钥(// 支付宝公钥)
-//                                .setPartner(AliSetting.PARTNER) //设置商户
-//                                .setSeller(AliSetting.SELLER) //设置商户收款账号
-//                                .create();
-//
-//                        //2.创建支付宝支付请求
-//                        AliPayReq aliPayReq = new AliPayReq.Builder()
-//                                .with(OrderconfirmActivity.this)//Activity实例
-//                                .apply(config)//支付宝支付通用配置
-//                                .setOutTradeNo(getOutTradeNo())//设置唯一订单号
-//                                .setPrice("1")//设置订单价格
-//                                .setSubject("来米汇")//设置订单标题
-//                                .setBody("来米汇订单支付")//设置订单内容 订单详情
-//                                .setCallbackUrl("http://notify.msp.hk/notify.htm")//设置回调地址
-//                                .create()//
-//                                .setOnAliPayListener(null);//
-//
-//                        //3.发送支付宝支付请求
-//                        PayAPI.getInstance().sendPayRequest(aliPayReq);
-//
-//                        //关于支付宝支付的回调
-//                       // aliPayReq.setOnAliPayListener(new AliPayReq.OnAliPayListener);
-                        ToAliPay();
-                        break;
-
-                }
-
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        builder.show();
-    }
-
-    private Handler mHandler = new Handler() {
-        @SuppressWarnings("unused")
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case SDK_PAY_FLAG: {
-                    PayResult payResult = new PayResult((String) msg.obj);
-                    /**
-                     * 同步返回的结果必须放置到服务端进行验证（验证的规则请看https://doc.open.alipay.com/doc2/
-                     * detail.htm?spm=0.0.0.0.xdvAU6&treeId=59&articleId=103665&
-                     * docType=1) 建议商户依赖异步通知
-                     */
-                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
-
-                    String resultStatus = payResult.getResultStatus();
-                    // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
-                    if (TextUtils.equals(resultStatus, "9000")) {
-                        // cancleorder("2", "2");
-//                        Toast.makeText(HorderdetailActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(OrderconfirmActivity.this);
-                        builder.setMessage("完成支付");
-                        builder.setTitle("支付成功");
-                        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                // getOrderDetail();
-                                dialog.dismiss();
-
-                            }
-                        });
-
-                        builder.create().show();
-                    } else {
-                        // 判断resultStatus 为非"9000"则代表可能支付失败
-                        // "8000"代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服务端异步通知为准（小概率状态）
-                        if (TextUtils.equals(resultStatus, "8000")) {
-                            Toast.makeText(OrderconfirmActivity.this, "支付结果确认中", Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            // 其他值就可以判断为支付失败，包括用户主动取消支付，或者系统返回的错误
-                            Toast.makeText(OrderconfirmActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                    break;
-                }
-                default:
-                    break;
-            }
+    public void makeorder(){
+        if(TextUtils.isEmpty(beizhu.getText())){
+            Toast.makeText(OrderconfirmActivity.this, "请填写备注！", Toast.LENGTH_LONG).show();
+        }else{
+            orderRemark=beizhu.getText().toString();
+            mOrderconfirmPresenter.createOrder(token,
+                    productOid,
+                    addressOid,
+                    communityOid,
+                    tradeCount,
+                    spbillCreateIp,
+                    freight,
+                    orderRemark);
         }
 
-        ;
-    };
-
-    private void ToAliPay() {
-        if (TextUtils.isEmpty(AliSetting.PARTNER) || TextUtils.isEmpty(AliSetting.RSA_PRIVATE) || TextUtils.isEmpty(AliSetting.SELLER)) {
-            new android.app.AlertDialog.Builder(this).setTitle("警告").setMessage("需要配置PARTNER | RSA_PRIVATE| SELLER")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialoginterface, int i) {
-                            //
-                            finish();
-                        }
-                    }).show();
-            return;
-        }
-        //String orderInfo = getOrderInfo("阿拉旅行", "房间预订", horderData.getHroomorderPay()+horderData.getHroomorderDeposit());
-
-        String orderInfo = getOrderInfo("来米汇", "订单支付", "1");
-
-        /**
-         * 特别注意，这里的签名逻辑需要放在服务端，切勿将私钥泄露在代码中！
-         */
-        String sign = sign(orderInfo);
-        try {
-            /**
-             * 仅需对sign 做URL编码
-             */
-            sign = URLEncoder.encode(sign, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        /**
-         * 完整的符合支付宝参数规范的订单信息
-         */
-        final String payInfo = orderInfo + "&sign=\"" + sign + "\"&" + getSignType();
-        Runnable payRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-                // 构造PayTask 对象
-                PayTask alipay = new PayTask(OrderconfirmActivity.this);
-                // 调用支付接口，获取支付结果
-                String result = alipay.pay(payInfo, true);
-
-                Message msg = new Message();
-                msg.what = SDK_PAY_FLAG;
-                msg.obj = result;
-                mHandler.sendMessage(msg);
-            }
-        };
-
-        // 必须异步调用
-        Thread payThread = new Thread(payRunnable);
-        payThread.start();
 
     }
 
-    /**
-     * get the sdk version. 获取SDK版本号
-     */
-    public void getSDKVersion() {
-        PayTask payTask = new PayTask(this);
-        String version = payTask.getVersion();
-        Toast.makeText(this, version, Toast.LENGTH_SHORT).show();
-    }
 
-    /**
-     * create the order info. 创建订单信息
-     */
-    private String getOrderInfo(String subject, String body, String price) {
 
-        // 签约合作者身份ID
-        String orderInfo = "partner=" + "\"" + AliSetting.PARTNER + "\"";
 
-        // 签约卖家支付宝账号
-        orderInfo += "&seller_id=" + "\"" + AliSetting.SELLER + "\"";
-
-        // 商户网站唯一订单号
-        orderInfo += "&out_trade_no=" + "\"" + getOutTradeNo() + "\"";
-
-        // 商品名称
-        orderInfo += "&subject=" + "\"" + subject + "\"";
-
-        // 商品详情
-        orderInfo += "&body=" + "\"" + body + "\"";
-
-        // 商品金额
-        orderInfo += "&total_fee=" + "\"" + price + "\"";
-
-        // 服务器异步通知页面路径
-        orderInfo += "&notify_url=" + "\"" + "http://notify.msp.hk/notify.htm" + "\"";
-
-        // 服务接口名称， 固定值
-        orderInfo += "&service=\"mobile.securitypay.pay\"";
-
-        // 支付类型， 固定值
-        orderInfo += "&payment_type=\"1\"";
-
-        // 参数编码， 固定值
-        orderInfo += "&_input_charset=\"utf-8\"";
-
-        // 设置未付款交易的超时时间
-        // 默认30分钟，一旦超时，该笔交易就会自动被关闭。
-        // 取值范围：1m～15d。
-        // m-分钟，h-小时，d-天，1c-当天（无论交易何时创建，都在0点关闭）。
-        // 该参数数值不接受小数点，如1.5h，可转换为90m。
-        orderInfo += "&it_b_pay=\"30m\"";
-
-        // extern_token为经过快登授权获取到的alipay_open_id,带上此参数用户将使用授权的账户进行支付
-        // orderInfo += "&extern_token=" + "\"" + extern_token + "\"";
-
-        // 支付宝处理完请求后，当前页面跳转到商户指定页面的路径，可空
-        orderInfo += "&return_url=\"m.alipay.com\"";
-
-        // 调用银行卡支付，需配置此参数，参与签名， 固定值 （需要签约《无线银行卡快捷支付》才能使用）
-        // orderInfo += "&paymethod=\"expressGateway\"";
-
-        return orderInfo;
-    }
-
-    /**
-     * get the out_trade_no for an order. 生成商户订单号，该值在商户端应保持唯一（可自定义格式规范）
-     */
-    private String getOutTradeNo() {
-        SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss", Locale.getDefault());
-        Date date = new Date();
-        String key = format.format(date);
-
-        Random r = new Random();
-        key = key + r.nextInt();
-        key = key.substring(0, 15);
-        return key;
-    }
-
-    /**
-     * sign the order info. 对订单信息进行签名
-     *
-     * @param content 待签名订单信息
-     */
-    private String sign(String content) {
-        return SignUtils.sign(content, AliSetting.RSA_PRIVATE);
-    }
-
-    /**
-     * get the sign type we use. 获取签名方式
-     */
-    private String getSignType() {
-        return "sign_type=\"RSA\"";
-    }
-
+    private OrderconfirmPresenter mOrderconfirmPresenter = new OrderconfirmPresenter(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orderconfirm);
         ButterKnife.bind(this);
+
+        SharedPreferences settings = getSharedPreferences(PREFUSER, 0);
+        token = settings.getString(PREF_TOKEN, "");
+        communityOid=settings.getString(PREF_CID,"");
+
+        Bundle bundle = this.getIntent().getExtras();
+        mProductDetail = (ProductDetail) bundle.getSerializable("productDetail");
+        tradeCount = (String) bundle.getString("num");
+
+        productnum.setText("数量："+tradeCount+"个");
+        productprice.setText(String.valueOf(mProductDetail.getData().getShowSalePrice())+"元");
+        productname.setText(mProductDetail.getData().getProductName());
+        Picasso.with(OrderconfirmActivity.this).load(mProductDetail.getData().getCoverId()).into(ivProductImage);
+        yingfu.setText(String.valueOf(mProductDetail.getData().getShowSalePrice())+"元");
+        productOid=String.valueOf(mProductDetail.getData().getObjectId());
+
+        mOrderconfirmPresenter.onCreate();
+        mOrderconfirmPresenter.attachView(mOrderconfirmView);
+        mOrderconfirmPresenter.getDefaltAddress("9e5292a94082476ebd6cbd4f55916885");
+
+        spbillCreateIp=getIPAddress(this);
+
+    }
+
+    public static String getIPAddress(Context context) {
+        NetworkInfo info = ((ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+        if (info != null && info.isConnected()) {
+            if (info.getType() == ConnectivityManager.TYPE_MOBILE) {//当前使用2G/3G/4G网络
+                try {
+                    //Enumeration<NetworkInterface> en=NetworkInterface.getNetworkInterfaces();
+                    for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                        NetworkInterface intf = en.nextElement();
+                        for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                            InetAddress inetAddress = enumIpAddr.nextElement();
+                            if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
+                                return inetAddress.getHostAddress();
+                            }
+                        }
+                    }
+                } catch (SocketException e) {
+                    e.printStackTrace();
+                }
+
+            } else if (info.getType() == ConnectivityManager.TYPE_WIFI) {//当前使用无线网络
+                WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+                String ipAddress = intIP2StringIP(wifiInfo.getIpAddress());//得到IPV4地址
+                return ipAddress;
+            }
+        } else {
+            //当前无网络连接,请在设置中打开网络
+        }
+        return null;
+    }
+
+    /**
+     * 将得到的int类型的IP转换为String类型
+     *
+     * @param ip
+     * @return
+     */
+    public static String intIP2StringIP(int ip) {
+        return (ip & 0xFF) + "." +
+                ((ip >> 8) & 0xFF) + "." +
+                ((ip >> 16) & 0xFF) + "." +
+                (ip >> 24 & 0xFF);
+    }
+    private OrderconfirmView mOrderconfirmView = new OrderconfirmView() {
+
+        @Override
+        public void onAddress(Address result) {
+            addressOid=String.valueOf(result.getData().getObjectId());
+            tvCollectAddress.setText("收货地址："+result.getData().getReceiverAddress());
+        }
+
+        @Override
+        public void onError(String result) {
+
+        }
+
+        @Override
+        public void onCreateOrder(createOrder result) {
+            Intent intent = new Intent(OrderconfirmActivity.this, PayActivity.class);
+            Bundle bundle = new Bundle();
+
+            bundle.putSerializable("createOrder", result);
+
+            intent.putExtras(bundle);
+            OrderconfirmActivity.this.startActivity(intent);
+            finish();
+           // bundle.putSerializable("hotelData", resultListData.get(getLayoutPosition()));
+           // Toast.makeText(OrderconfirmActivity.this, result.getData().getPrepayId(), Toast.LENGTH_LONG).show();
+        }
+    };
+
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        mOrderconfirmPresenter.onStop();
     }
 }

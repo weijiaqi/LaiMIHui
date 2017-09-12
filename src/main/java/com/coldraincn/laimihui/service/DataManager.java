@@ -3,6 +3,7 @@ package com.coldraincn.laimihui.service;
 import android.content.Context;
 
 
+import com.coldraincn.laimihui.entity.Address;
 import com.coldraincn.laimihui.entity.BindPhone;
 import com.coldraincn.laimihui.entity.FreshOnLine;
 import com.coldraincn.laimihui.entity.Lactivity;
@@ -68,7 +69,21 @@ public class DataManager {
     public Observable<ProductDetail> productDetail(String token, String productOid){
         return mRetrofitService.productDetail(token,productOid);
     }
-    public Observable<createOrder> createOrder(String token, String productOid,String addressOid,String communityOid,String tradeCount,String payType,String freight,String orderRemark){
-        return mRetrofitService.createOrder(token,productOid,addressOid,communityOid,tradeCount,payType,freight,orderRemark);
+    public Observable<createOrder> createOrder(String token, String productOid,String addressOid,String communityOid,
+                                               String tradeCount,String spbillCreateIp,String freight,String orderRemark){
+
+        String a=token;
+        String sss=productOid;
+        String ssc=addressOid;
+        String svs=communityOid;
+        String sbs=tradeCount;
+        String sns=spbillCreateIp;
+        String sms=freight;
+        String ss=orderRemark;
+        return mRetrofitService.createOrder(token,productOid,addressOid,communityOid,
+                tradeCount,spbillCreateIp,freight,orderRemark);
+    }
+    public Observable<Address> getDefaultAddress(String token){
+        return mRetrofitService.getDefaultAddress(token);
     }
 }

@@ -1,12 +1,14 @@
 package com.coldraincn.laimihui.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by hd on 2017/9/10.
  */
 
-public class ProductDetail {
+public class ProductDetail implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * status : OK
@@ -32,7 +34,8 @@ public class ProductDetail {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean  implements Serializable {
+        private static final long serialVersionUID = 1L;
         /**
          * coverId : http://api.17yun.com.cn/upload/20170731/533821041184991.jpg
          * imglist : ["http://dev.wecity.co/upload/20170731/533823460732199.jpg","http://dev.wecity.co/upload/20170904/245930890258055.jpg","http://dev.wecity.co/upload/20170904/245933679275300.jpg"]

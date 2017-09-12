@@ -1,6 +1,7 @@
 package com.coldraincn.laimihui.service;
 
 
+import com.coldraincn.laimihui.entity.Address;
 import com.coldraincn.laimihui.entity.BindPhone;
 import com.coldraincn.laimihui.entity.FreshOnLine;
 import com.coldraincn.laimihui.entity.Lactivity;
@@ -80,11 +81,15 @@ public interface RetrofitService {
     @FormUrlEncoded
     @POST("order/createOrder.do")
     Observable<createOrder> createOrder(@Header("token") String token,
-                                        @Query("productOid") String productOid,
-                                        @Query("addressOid") String addressOid,
-                                        @Query("communityOid") String communityOid,
-                                        @Query("tradeCount") String tradeCount,
-                                        @Query("payType") String payType,
-                                        @Query("freight") String freight,
-                                        @Query("orderRemark") String orderRemark);
+                                        @Field("productOid") String productOid,
+                                        @Field("addressOid") String addressOid,
+                                        @Field("communityOid") String communityOid,
+                                        @Field("tradeCount") String tradeCount,
+                                        @Field("spbillCreateIp") String spbillCreateIp,
+                                        @Field("freight") String freight,
+                                        @Field("orderRemark") String orderRemark);
+    //获取默认地址
+    @GET("address/getDefaultAddress.do")
+    Observable<Address> getDefaultAddress(@Header("token") String token);
+
 }

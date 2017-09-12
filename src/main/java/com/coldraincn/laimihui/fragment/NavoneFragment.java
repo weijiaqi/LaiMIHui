@@ -94,6 +94,7 @@ public class NavoneFragment extends Fragment {
 
         mFirstPresenter.onCreate();
         mFirstPresenter.attachView(mFirstView);
+
         mFirstPresenter.getTodayExplosionList(token);
         mFirstPresenter.getActivityList(token);
         mFirstPresenter.getExcellentFreshOnLineList(token);
