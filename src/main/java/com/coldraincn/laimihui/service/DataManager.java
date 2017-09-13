@@ -5,11 +5,13 @@ import android.content.Context;
 
 import com.coldraincn.laimihui.entity.Address;
 import com.coldraincn.laimihui.entity.BindPhone;
+import com.coldraincn.laimihui.entity.COrderlist;
 import com.coldraincn.laimihui.entity.FreshOnLine;
 import com.coldraincn.laimihui.entity.HomeHoteData;
 import com.coldraincn.laimihui.entity.Lactivity;
 import com.coldraincn.laimihui.entity.ListMessage;
 import com.coldraincn.laimihui.entity.MessageCode;
+import com.coldraincn.laimihui.entity.OrderList;
 import com.coldraincn.laimihui.entity.Product;
 import com.coldraincn.laimihui.entity.ProductDetail;
 import com.coldraincn.laimihui.entity.SeasonSell;
@@ -89,5 +91,19 @@ public class DataManager {
     }
     public Observable<Address> getDefaultAddress(String token){
         return mRetrofitService.getDefaultAddress(token);
+    }
+    public Observable<OrderList> getUserOrderList(String token, String orderStatus){
+        return mRetrofitService.getUserOrderList(token,orderStatus);
+    }
+    public Observable<BindPhone> saveNewPhone(String token, String phone, long userId, String phone2) {
+        return mRetrofitService.saveNewPhone(token, phone, userId, phone2);
+    }
+
+    public Observable<BindPhone> savePersonData(String token, String name, String idCard) {
+        return mRetrofitService.savePersonData(token, name, idCard);
+    }
+
+    public Observable<COrderlist> getCommunityOrderList(String token, String communityOid, String orderStatus) {
+        return mRetrofitService.getCommunityOrderList(token, communityOid, orderStatus);
     }
 }

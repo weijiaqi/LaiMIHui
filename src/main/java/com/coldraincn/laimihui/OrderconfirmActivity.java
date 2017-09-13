@@ -150,8 +150,8 @@ public class OrderconfirmActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         SharedPreferences settings = getSharedPreferences(PREFUSER, 0);
-        token = settings.getString(PREF_TOKEN, "");
-        communityOid=settings.getString(PREF_CID,"");
+        token = settings.getString(PREF_TOKEN, "1");
+        communityOid=settings.getString(PREF_CID,"1");
 
         Bundle bundle = this.getIntent().getExtras();
         mProductDetail = (ProductDetail) bundle.getSerializable("productDetail");
@@ -166,7 +166,7 @@ public class OrderconfirmActivity extends AppCompatActivity {
 
         mOrderconfirmPresenter.onCreate();
         mOrderconfirmPresenter.attachView(mOrderconfirmView);
-        mOrderconfirmPresenter.getDefaltAddress("9e5292a94082476ebd6cbd4f55916885");
+        mOrderconfirmPresenter.getDefaltAddress(token);
 
         spbillCreateIp=getIPAddress(this);
 

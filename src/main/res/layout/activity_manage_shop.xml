@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#beffcc">
+
+        <com.coldraincn.laimihui.view.CircleImageView
+            android:layout_width="49dp"
+            android:layout_height="49dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/ic_launcher"
+            app:border_color="#e4dcdc"
+            app:border_width="0dp" />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="25dp"
+            android:layout_marginRight="-15dp"
+            android:layout_toLeftOf="@+id/tv_name"
+            android:background="@drawable/bg_circle_white" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="25dp"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingRight="15dp"
+            android:text="来米汇的店铺"
+            android:textColor="#8ce765"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#e5e5e5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="15dp">
+
+        <LinearLayout
+            android:id="@+id/ll_my_shop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/manage_shop_iv"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                style="@style/manage_shop_tv"
+                android:text="我的店铺" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/manage_shop_iv"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                style="@style/manage_shop_tv"
+                android:text="商品管理" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_manage_order"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/manage_shop_iv"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                style="@style/manage_shop_tv"
+                android:text="订单管理" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/manage_shop_iv"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                style="@style/manage_shop_tv"
+                android:text="我的钱包" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/manage_shop_iv"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                style="@style/manage_shop_tv"
+                android:text="数据统计" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/manage_shop_iv"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                style="@style/manage_shop_tv"
+                android:text="活动管理" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/manage_shop_iv"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                style="@style/manage_shop_tv"
+                android:text="VIP会员" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/manage_shop_iv"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                style="@style/manage_shop_tv"
+                android:text="会员店管理" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/manage_shop_iv"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                style="@style/manage_shop_tv"
+                android:text="旗舰店订单统计" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

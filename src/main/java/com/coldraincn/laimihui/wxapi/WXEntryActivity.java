@@ -1,34 +1,20 @@
 package com.coldraincn.laimihui.wxapi;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.coldraincn.laimihui.AppApplication;
 import com.coldraincn.laimihui.BindcellActivity;
-import com.coldraincn.laimihui.LoginActivity;
-import com.coldraincn.laimihui.MainActivity;
-import com.coldraincn.laimihui.StartActivity;
-import com.coldraincn.laimihui.entity.MessageCode;
 import com.coldraincn.laimihui.entity.User;
-import com.coldraincn.laimihui.presenter.LoginPresenter;
 import com.coldraincn.laimihui.presenter.WXPresenter;
-import com.coldraincn.laimihui.view.LoginView;
 import com.coldraincn.laimihui.view.WXView;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.orhanobut.logger.Logger;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -38,19 +24,14 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
-
 import common.Constants;
+import common.LogUtil;
+import common.ToastUtils;
 import cz.msebera.android.httpclient.Header;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
-
-
+	private static final String TAG = "WXEntryActivity";
+	public static int types;
 	public static final String PREFUSER = "USER";
 	public static final String PREF_CELL = "CELL";
 	public static final String PREF_TOKEN = "TOKEN";
@@ -59,6 +40,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 	private WXPresenter mWXPresenter = new WXPresenter(this);
 
 	private Gson mGson;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -68,7 +50,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 		mWXPresenter.onCreate();
 		mWXPresenter.attachView(mWXView);
 	}
-
 
 
 	/**
@@ -92,6 +73,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 		 */
 		req.state = "app_wechat";
 		api.sendReq(req);
+		LogUtil.d(TAG, req.scope);
 	}
 
 	// 微信发送请求到第三方应用时，会回调到该方法
@@ -106,19 +88,29 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 				break;
 		}
 	}
+
 	// 第三方应用发送到微信的请求处理后的响应结果，会回调到该方法
 	@Override
 	public void onResp(BaseResp resp) {
 		switch (resp.errCode) {
 			// 发送成功
 			case BaseResp.ErrCode.ERR_OK:
-				// 获取code
-				String code = ((SendAuth.Resp) resp).code;
-				// 通过code获取授权口令access_token
-				getAccessToken(code);
+				if (types == 2) {//分享
+					ToastUtils.show(WXEntryActivity.this, "分享成功");
+					finish();
+				} else {//登录
+					// 获取code
+					String code = ((SendAuth.Resp) resp).code;
+					LogUtil.d(TAG, "code:" + code);
+					LogUtil.d(TAG, "state:" + ((SendAuth.Resp) resp).state);
+					LogUtil.d(TAG, "lang:" + ((SendAuth.Resp) resp).lang);
+					// 通过code获取授权口令access_token
+					getAccessToken(code);
+				}
 				break;
 		}
 	}
+
 	private void getAccessToken(String code) {
 		String url = "https://api.weixin.qq.com/sns/oauth2/access_token?" +
 				"appid=" + Constants.APP_ID +
@@ -140,9 +132,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 						System.out.println(unionid + "===" + openid + "===" + refresh_token + "===" + expires_in + "===" + access_token);
 
 
-
 						client.get("https://api.weixin.qq.com/sns/userinfo?access_token=" + access_token +
-								"&openid=" + openid, new JsonHttpResponseHandler(){
+								"&openid=" + openid, new JsonHttpResponseHandler() {
 							@Override
 							public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 								super.onSuccess(statusCode, headers, response);
@@ -157,8 +148,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 										String headimgurl = response.getString("headimgurl");
 										String unionid = response.getString("unionid");
 
-										mWXPresenter.weixinLogin(nickname,sex,province,city,country,headimgurl,unionid);
-
+										mWXPresenter.weixinLogin(nickname, sex, province, city, country, headimgurl, unionid);
 
 
 									} catch (Exception e) {
@@ -188,12 +178,13 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 			SharedPreferences.Editor editor = settings.edit();
 			editor.putString(PREF_CELL, mUser.getData().getPhone());
 			editor.putString(PREF_TOKEN, mUser.getData().getToken());
-			editor.putString(PREF_CID, Double.toString(mUser.getData().getCommunityOid()));
+			editor.putString(PREF_CID, mUser.getData().getCommunityOid() + "");
 			editor.apply();
 //
 //
 //
-			Intent intent = new Intent(WXEntryActivity.this,BindcellActivity.class);
+			Intent intent = new Intent(WXEntryActivity.this, BindcellActivity.class);
+			intent.putExtra("nickName", mUser.getData().getUserWxNickname());
 			startActivity(intent);
 			WXEntryActivity.this.finish();
 		}
@@ -208,12 +199,10 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
 
 	@Override
-	public void onDestroy(){
+	public void onDestroy() {
 		super.onDestroy();
 		mWXPresenter.onStop();
 	}
-
-
 
 
 }

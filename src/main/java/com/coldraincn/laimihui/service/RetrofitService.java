@@ -3,11 +3,13 @@ package com.coldraincn.laimihui.service;
 
 import com.coldraincn.laimihui.entity.Address;
 import com.coldraincn.laimihui.entity.BindPhone;
+import com.coldraincn.laimihui.entity.COrderlist;
 import com.coldraincn.laimihui.entity.FreshOnLine;
 import com.coldraincn.laimihui.entity.HomeHoteData;
 import com.coldraincn.laimihui.entity.Lactivity;
 import com.coldraincn.laimihui.entity.ListMessage;
 import com.coldraincn.laimihui.entity.MessageCode;
+import com.coldraincn.laimihui.entity.OrderList;
 import com.coldraincn.laimihui.entity.Product;
 import com.coldraincn.laimihui.entity.ProductDetail;
 import com.coldraincn.laimihui.entity.SeasonSell;
@@ -92,8 +94,33 @@ public interface RetrofitService {
                                         @Field("spbillCreateIp") String spbillCreateIp,
                                         @Field("freight") String freight,
                                         @Field("orderRemark") String orderRemark);
+
+    //订单列表
+    @POST("order/getUserOrderList.do")
+    Observable<OrderList> getUserOrderList(@Header("token") String token, @Query("orderStatus") String orderStatus);
     //获取默认地址
     @GET("address/getDefaultAddress.do")
     Observable<Address> getDefaultAddress(@Header("token") String token);
+
+    @FormUrlEncoded
+    @POST("cashAccount/saveNewPhone.do")
+    Observable<BindPhone> saveNewPhone(
+            @Header("token") String token,
+            @Header("phone") String phone,
+            @Field("userId") long userId,
+            @Field("phone") String phone1);
+
+    @FormUrlEncoded
+    @POST("cashAccount/savePersonData.do")
+    Observable<BindPhone> savePersonData(
+            @Header("token") String token,
+            @Field("name") String name,
+            @Field("idCard") String idCard);
+    @GET("community/getCommunityOrderList.do")
+    Observable<COrderlist> getCommunityOrderList(
+            @Header("token") String token,
+            @Query("communityOid") String communityOid,
+            @Query("orderStatus") String orderStatus
+    );
 
 }

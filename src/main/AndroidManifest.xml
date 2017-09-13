@@ -102,7 +102,11 @@
         <!-- android:screenOrientation="behind" /> -->
 
         <activity android:name=".PayActivity" />
-        <activity android:name=".PaySuccessActivity"></activity>
+        <activity android:name=".PaySuccessActivity" />
+        <activity android:name=".ManageShopActivity" />
+        <activity android:name=".MyOrdersActivity" />
+        <activity android:name=".ChangeInfoActivity" />
+        <activity android:name=".ChangeMobileActivity"></activity>
     </application>
 
 </manifest>

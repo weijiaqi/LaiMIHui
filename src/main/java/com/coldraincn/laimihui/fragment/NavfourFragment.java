@@ -1,6 +1,7 @@
 package com.coldraincn.laimihui.fragment;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,14 +11,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.coldraincn.laimihui.LoginActivity;
+import com.coldraincn.laimihui.MyOrdersActivity;
 import com.coldraincn.laimihui.R;
+import com.coldraincn.laimihui.WeixinActivity;
 import com.coldraincn.laimihui.widget.RoundImageView;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -31,6 +37,8 @@ public class NavfourFragment extends Fragment {
     public static final String PREF_USERROLE = "USERROLE";
     public static final String PREF_IMAGE = "IMAGE";
     public static final String PREF_NAME = "NAME";
+    @BindView(R.id.myorders)
+    RelativeLayout myorders;
 
     private String token;
     private String name;
@@ -75,6 +83,22 @@ public class NavfourFragment extends Fragment {
     Button buttonlogout;
     Unbinder unbinder;
 
+    @OnClick(R.id.buttonlogout)
+    public void logout() {
+        getActivity().finish();
+        SharedPreferences settings = getActivity().getSharedPreferences(PREFUSER, 0);
+        settings.edit().clear().apply();
+        startActivity(new Intent(getActivity(), LoginActivity.class));
+
+    }
+    @OnClick(R.id.myorders)
+    public void setMyorders() {
+        Intent intent = new Intent (getActivity(),MyOrdersActivity.class);
+        startActivity(intent);
+
+
+    }
+
     public NavfourFragment() {
         // Required empty public constructor
     }
@@ -88,19 +112,23 @@ public class NavfourFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         SharedPreferences settings = getActivity().getSharedPreferences(PREFUSER, 0);
-        token = settings.getString(PREF_TOKEN, "");
-        name = settings.getString(PREF_NAME, "");
+        token = settings.getString(PREF_TOKEN, "1");
+        name = settings.getString(PREF_NAME, "1");
         image = settings.getString(PREF_IMAGE, "");
         role = settings.getString(PREF_USERROLE, "");
         id = settings.getString(PREF_CID, "");
+        if (!image.equals("")) {
+            Picasso.with(getActivity()).load(image).into(circleImageview);
+        }
 
-        Picasso.with(getActivity()).load(image).into(circleImageview);
+
         textname.setText(name);
-        if(role.equals("1")){
+        if (role.equals("1")) {
             buttonmanege.setVisibility(View.INVISIBLE);
         }
 
