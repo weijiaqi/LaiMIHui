@@ -3,10 +3,15 @@ package com.coldraincn.laimihui.service;
 import android.content.Context;
 
 
+import com.coldraincn.laimihui.entity.AddAddress;
 import com.coldraincn.laimihui.entity.Address;
+import com.coldraincn.laimihui.entity.AddressList;
+import com.coldraincn.laimihui.entity.Area;
 import com.coldraincn.laimihui.entity.BindPhone;
 import com.coldraincn.laimihui.entity.COrderlist;
+import com.coldraincn.laimihui.entity.DeleteAddress;
 import com.coldraincn.laimihui.entity.FreshOnLine;
+import com.coldraincn.laimihui.entity.GetAddress;
 import com.coldraincn.laimihui.entity.HomeHoteData;
 import com.coldraincn.laimihui.entity.Lactivity;
 import com.coldraincn.laimihui.entity.ListMessage;
@@ -17,6 +22,7 @@ import com.coldraincn.laimihui.entity.ProductDetail;
 import com.coldraincn.laimihui.entity.SeasonSell;
 import com.coldraincn.laimihui.entity.SelectTopic;
 import com.coldraincn.laimihui.entity.TodayExplosion;
+import com.coldraincn.laimihui.entity.UpdateAddress;
 import com.coldraincn.laimihui.entity.User;
 import com.coldraincn.laimihui.entity.VipProduct;
 import com.coldraincn.laimihui.entity.createOrder;
@@ -105,5 +111,45 @@ public class DataManager {
 
     public Observable<COrderlist> getCommunityOrderList(String token, String communityOid, String orderStatus) {
         return mRetrofitService.getCommunityOrderList(token, communityOid, orderStatus);
+    }
+    public Observable<AddressList> getAddressList(String token) {
+        return mRetrofitService.getAddressList(token);
+    }
+
+    public Observable<Area> getAreaData(String token, int pid) {
+        return mRetrofitService.getAreaData(token, pid);
+    }
+
+    public Observable<GetAddress> getAddress(String token, long addressid) {
+        return mRetrofitService.getAddress(token, addressid);
+    }
+    public Observable<DeleteAddress> deleteAddress(String token, long addressid) {
+        return mRetrofitService.deleteAddress(token, addressid);
+    }
+
+    public Observable<AddAddress> addAddress(String token, String receiverName,
+                                             String receiverPhoneNo,
+                                             String receiverAddress,
+                                             int isDefault,
+                                             String postCode,
+                                             int provinceCode,
+                                             int cityCode,
+                                             int areaCode) {
+        return mRetrofitService.addAddress(token, receiverName, receiverPhoneNo, receiverAddress
+                , isDefault, postCode, provinceCode, cityCode, areaCode);
+    }
+
+    public Observable<UpdateAddress> updateAddress(String token,
+                                                   long objectId,
+                                                   String receiverName,
+                                                   String receiverPhoneNo,
+                                                   String receiverAddress,
+                                                   int isDefault,
+                                                   String postCode,
+                                                   int provinceCode,
+                                                   int cityCode,
+                                                   int areaCode) {
+        return mRetrofitService.updateAddress(token, objectId, receiverName, receiverPhoneNo, receiverAddress
+                , isDefault, postCode, provinceCode, cityCode, areaCode);
     }
 }

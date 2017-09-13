@@ -106,7 +106,13 @@
         <activity android:name=".ManageShopActivity" />
         <activity android:name=".MyOrdersActivity" />
         <activity android:name=".ChangeInfoActivity" />
-        <activity android:name=".ChangeMobileActivity"></activity>
+        <activity android:name=".ChangeMobileActivity" />
+        <activity android:name=".AddressActivity" />
+        <activity android:name=".AddressAddActivity" />
+        <activity
+            android:name=".AddressModifyActivity"
+            android:label="@string/title_activity_address_modify"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

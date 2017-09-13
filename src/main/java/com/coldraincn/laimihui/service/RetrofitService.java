@@ -1,10 +1,15 @@
 package com.coldraincn.laimihui.service;
 
 
+import com.coldraincn.laimihui.entity.AddAddress;
 import com.coldraincn.laimihui.entity.Address;
+import com.coldraincn.laimihui.entity.AddressList;
+import com.coldraincn.laimihui.entity.Area;
 import com.coldraincn.laimihui.entity.BindPhone;
 import com.coldraincn.laimihui.entity.COrderlist;
+import com.coldraincn.laimihui.entity.DeleteAddress;
 import com.coldraincn.laimihui.entity.FreshOnLine;
+import com.coldraincn.laimihui.entity.GetAddress;
 import com.coldraincn.laimihui.entity.HomeHoteData;
 import com.coldraincn.laimihui.entity.Lactivity;
 import com.coldraincn.laimihui.entity.ListMessage;
@@ -15,6 +20,7 @@ import com.coldraincn.laimihui.entity.ProductDetail;
 import com.coldraincn.laimihui.entity.SeasonSell;
 import com.coldraincn.laimihui.entity.SelectTopic;
 import com.coldraincn.laimihui.entity.TodayExplosion;
+import com.coldraincn.laimihui.entity.UpdateAddress;
 import com.coldraincn.laimihui.entity.User;
 import com.coldraincn.laimihui.entity.VipProduct;
 import com.coldraincn.laimihui.entity.createOrder;
@@ -122,5 +128,44 @@ public interface RetrofitService {
             @Query("communityOid") String communityOid,
             @Query("orderStatus") String orderStatus
     );
+
+    //地址列表
+    @GET("address/getAddressList.do")
+    Observable<AddressList> getAddressList(@Header("token") String token);
+    //行政区域信息
+    @GET("address/getAreaData.do")
+    Observable<Area> getAreaData(@Header("token") String token, @Query("pid") int pid);
+    //获取详细收货地址
+    @GET("address/getAddress.do")
+    Observable<GetAddress> getAddress(@Header("token") String token, @Query("addressid") long addressid);
+    //删除收货地址
+    @GET("address/deleteAddress.do")
+    Observable<DeleteAddress> deleteAddress(@Header("token") String token, @Query("addressid") long addressid);
+    //添加收货地址
+    @FormUrlEncoded
+    @POST("address/addAddress.do")
+    Observable<AddAddress> addAddress(@Header("token") String token,
+                                      @Field("receiverName") String receiverName,
+                                      @Field("receiverPhoneNo") String receiverPhoneNo,
+                                      @Field("receiverAddress") String receiverAddress,
+                                      @Field("isDefault") int isDefault,
+                                      @Field("postCode") String postCode,
+                                      @Field("provinceCode") int provinceCode,
+                                      @Field("cityCode") int cityCode,
+                                      @Field("areaCode") int areaCode);
+    //10、修改收货地址
+    @FormUrlEncoded
+    @POST("address/updateAddress.do")
+    Observable<UpdateAddress> updateAddress(@Header("token") String token,
+                                            @Field("objectId") long objectId,
+                                            @Field("receiverName") String receiverName,
+                                            @Field("receiverPhoneNo") String receiverPhoneNo,
+                                            @Field("receiverAddress") String receiverAddress,
+                                            @Field("isDefault") int isDefault,
+                                            @Field("postCode") String postCode,
+                                            @Field("provinceCode") int provinceCode,
+                                            @Field("cityCode") int cityCode,
+                                            @Field("areaCode") int areaCode);
+
 
 }

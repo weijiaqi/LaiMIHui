@@ -36,4 +36,5 @@
     <string name="inloading">正在加载，请稍后</string>
     <string name="loadmore_complete">没有更多</string>
     <string name="loadmore_retry">点击重试</string>
+    <string name="title_activity_address_modify">AddressModifyActivity</string>
 </resources>

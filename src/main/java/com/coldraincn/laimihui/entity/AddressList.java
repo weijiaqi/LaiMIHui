@@ -1,18 +1,20 @@
 package com.coldraincn.laimihui.entity;
 
+import java.util.List;
+
 /**
- * Created by hd on 2017/9/12.
+ * <Pre>
+ *     商品列表
+ * </Pre>
+ *
+ * @version 1.0
+ *          <p>
+ *          Create by 2017/9/11 13:41
  */
 
-public class Address {
-
-    /**
-     * status : OK
-     * data : {"area":"","areaCode":110101,"city":"","cityCode":110100,"isDefault":"1","objectId":608353049428800,"postCode":"1000091","province":"","provinceCode":110000,"receiverAddress":"北京市海淀区中关村南大街","receiverName":"赵宝","receiverPhoneNo":"13522890823"}
-     */
-
+public class AddressList {
     private String status;
-    private DataBean data;
+    private List<DataBean> data;
 
     public String getStatus() {
         return status;
@@ -22,52 +24,36 @@ public class Address {
         this.status = status;
     }
 
-    public DataBean getData() {
+    public List<DataBean> getData() {
         return data;
     }
 
-    public void setData(DataBean data) {
+    public void setData(List<DataBean> data) {
         this.data = data;
     }
 
-    public static class DataBean {
+    public class DataBean{
         /**
-         * area :
-         * areaCode : 110101
-         * city :
+         * areaCode : 110108
          * cityCode : 110100
          * isDefault : 1
-         * objectId : 608353049428800
-         * postCode : 1000091
-         * province :
+         * objectId : 754539076389498
+         * postCode : 100081
          * provinceCode : 110000
          * receiverAddress : 北京市海淀区中关村南大街
-         * receiverName : 赵宝
-         * receiverPhoneNo : 13522890823
+         * receiverName : 苏文君
+         * receiverPhoneNo : 13810153494
          */
 
-        private String area;
         private int areaCode;
-        private String city;
         private int cityCode;
-        private int isDefault;
+        private String isDefault;
         private long objectId;
         private String postCode;
-        private String province;
         private int provinceCode;
         private String receiverAddress;
         private String receiverName;
         private String receiverPhoneNo;
-
-
-
-        public String getArea() {
-            return area;
-        }
-
-        public void setArea(String area) {
-            this.area = area;
-        }
 
         public int getAreaCode() {
             return areaCode;
@@ -75,14 +61,6 @@ public class Address {
 
         public void setAreaCode(int areaCode) {
             this.areaCode = areaCode;
-        }
-
-        public String getCity() {
-            return city;
-        }
-
-        public void setCity(String city) {
-            this.city = city;
         }
 
         public int getCityCode() {
@@ -93,11 +71,11 @@ public class Address {
             this.cityCode = cityCode;
         }
 
-        public int getIsDefault() {
+        public String getIsDefault() {
             return isDefault;
         }
 
-        public void setIsDefault(int isDefault) {
+        public void setIsDefault(String isDefault) {
             this.isDefault = isDefault;
         }
 
@@ -115,14 +93,6 @@ public class Address {
 
         public void setPostCode(String postCode) {
             this.postCode = postCode;
-        }
-
-        public String getProvince() {
-            return province;
-        }
-
-        public void setProvince(String province) {
-            this.province = province;
         }
 
         public int getProvinceCode() {

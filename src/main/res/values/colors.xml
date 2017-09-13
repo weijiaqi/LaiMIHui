@@ -12,4 +12,5 @@
     <color name="text_ce0c15">#ce0c15</color>
     <color name="text_333333">#333333</color>
     <color name="button_green">#00cd00</color>
+    <color name="bg_gray">#EEEEEE</color>
 </resources>
