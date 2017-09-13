@@ -1,6 +1,8 @@
 package com.coldraincn.laimihui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.coldraincn.laimihui.ProductDetailActivity;
 import com.coldraincn.laimihui.R;
 import com.coldraincn.laimihui.entity.Product;
 import com.squareup.picasso.Picasso;
@@ -27,6 +30,7 @@ public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.
     //    private List<Product.DataBean.DatalistBean> mDataBean = new ArrayList<>();
     private List<Map<String, Object>> listItems;
     private final Context mContext;
+    private String productOid;
     public HomeProductAdapter(Context context , List<Map<String, Object>> listItems) {
 //        this.mDataBean = mProduct;
         this.listItems = listItems;
@@ -35,7 +39,7 @@ public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.
 
     @Override
     public ProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ProductViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_home_product_list,parent,false));
+        return new ProductViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_home_product_list,parent,false),this);
     }
 
     @Override
@@ -45,6 +49,7 @@ public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.
             Picasso.with(mContext).load(listItems.get(position).get("pic").toString()).into(holder.product_pic);
             holder.product_name.setText(listItems.get(position).get("name").toString());
             holder.product_price.setText("￥" + listItems.get(position).get("price").toString());
+            productOid =listItems.get(position).get("url").toString();
         }
     }
 
@@ -53,7 +58,9 @@ public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.
         return listItems == null ? 0 : listItems.size();
     }
 
-    class ProductViewHolder extends RecyclerView.ViewHolder{
+
+
+    public class ProductViewHolder extends RecyclerView.ViewHolder{
 
         @BindView(R.id.product_pic)
         ImageView product_pic;
@@ -61,9 +68,25 @@ public class HomeProductAdapter extends RecyclerView.Adapter<HomeProductAdapter.
         TextView product_name;
         @BindView(R.id.product_price)
         TextView product_price;
-        public ProductViewHolder(View itemView) {
+        HomeProductAdapter mHomeProductAdapter;
+        public ProductViewHolder(View itemView,HomeProductAdapter adapter) {
             super(itemView);
+            mHomeProductAdapter=adapter;
+
             ButterKnife.bind(this,itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    Intent intent = new Intent(mHomeProductAdapter.mContext, ProductDetailActivity.class);
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("productOid",productOid);
+                    intent.putExtras(bundle);
+                    mHomeProductAdapter.mContext.startActivity(intent);
+                }
+            });
         }
     }
 }

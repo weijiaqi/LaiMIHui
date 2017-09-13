@@ -317,6 +317,7 @@ public class NavoneFragment extends Fragment {
             map.put("pic", mLactivity.getData().getDatalist().get(i).getCoverId());
             map.put("name", mLactivity.getData().getDatalist().get(i).getProductName());
             map.put("price", mLactivity.getData().getDatalist().get(i).getShowSalePrice());
+            map.put("url", mLactivity.getData().getDatalist().get(i).getObjectId());
 
             listItems.add(map);
         }
