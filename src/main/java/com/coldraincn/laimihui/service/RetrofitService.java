@@ -4,6 +4,7 @@ package com.coldraincn.laimihui.service;
 import com.coldraincn.laimihui.entity.Address;
 import com.coldraincn.laimihui.entity.BindPhone;
 import com.coldraincn.laimihui.entity.FreshOnLine;
+import com.coldraincn.laimihui.entity.HomeHoteData;
 import com.coldraincn.laimihui.entity.Lactivity;
 import com.coldraincn.laimihui.entity.ListMessage;
 import com.coldraincn.laimihui.entity.MessageCode;
@@ -53,25 +54,28 @@ public interface RetrofitService {
     //活动入口
     @GET("activity/getActivityList.do")
     Observable<Lactivity> getActivityList(@Header("token") String token);
-    //今日爆款
-    @GET("hot/getTodayExplosionList.do")
-    Observable<TodayExplosion> getTodayExplosionList(@Header("token") String token);
-    //3. 优鲜上线
-    @GET("hot/getExcellentFreshOnLineList.do")
-    Observable<FreshOnLine> getExcellentFreshOnLineList(@Header("token") String token);
-    //4. 当季热销
-    @GET("hot/getSeasonSellList.do")
-    Observable<SeasonSell> getSeasonSellList(@Header("token") String token);
-    //VIP特供
-    @GET("hot/getVipProductList.do")
-    Observable<VipProduct> getVipProductList(@Header("token") String token);
-    //5. 精选专题
-    @GET("hot/getSelectTopicList.do")
-    Observable<SelectTopic> getSelectTopicList(@Header("token") String token);
- //5. 商品列表
- @GET("product/getProductList.do")
- Observable<Product> getProductList(@Header("token") String token);
- //推荐
+//    //今日爆款
+//    @GET("hot/getTodayExplosionList.do")
+//    Observable<TodayExplosion> getTodayExplosionList(@Header("token") String token);
+//    //3. 优鲜上线
+//    @GET("hot/getExcellentFreshOnLineList.do")
+//    Observable<FreshOnLine> getExcellentFreshOnLineList(@Header("token") String token);
+//    //4. 当季热销
+//    @GET("hot/getSeasonSellList.do")
+//    Observable<SeasonSell> getSeasonSellList(@Header("token") String token);
+//    //VIP特供
+//    @GET("hot/getVipProductList.do")
+//    Observable<VipProduct> getVipProductList(@Header("token") String token);
+//    //5. 精选专题
+//    @GET("hot/getSelectTopicList.do")
+//    Observable<SelectTopic> getSelectTopicList(@Header("token") String token);
+    //首页列表数据获取
+    @GET("hot/getHomeHoteList.do")
+    Observable<HomeHoteData> getHomeHoteList(@Header("token") String token);
+    //5. 商品列表
+    @GET("product/getProductList.do")
+    Observable<Product> getProductList(@Header("token") String token, @Query("pageNo") String pageNo, @Query("pageSize") String pageSize);
+    //推荐
  @GET("dynamic/getlistMessage.do")
  Observable<ListMessage> getlistMessage(@Header("token") String token, @Query("communityOid") String communityOid);
     //商品详情

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:id="@+id/product_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/text_333333"
+                android:textSize="14sp"
+                tools:text="基地直供！山东青岛现捕梭子蟹 膏肥黄满 现捞现发 顺丰直达基地直供！基地直供！山东青岛现捕梭子蟹 膏肥黄满 现捞现发 顺丰直达山东青岛现捕梭子蟹 膏肥黄满 现捞现发 顺丰直达基地直供！山东青岛现捕梭子蟹 膏肥黄满 现捞现发 顺丰直达"/>
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_ce0c15"
+                android:textSize="14sp"
+                android:layout_marginLeft="5dp"
+                tools:text="233"/>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

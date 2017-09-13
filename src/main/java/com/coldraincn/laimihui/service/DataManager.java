@@ -6,6 +6,7 @@ import android.content.Context;
 import com.coldraincn.laimihui.entity.Address;
 import com.coldraincn.laimihui.entity.BindPhone;
 import com.coldraincn.laimihui.entity.FreshOnLine;
+import com.coldraincn.laimihui.entity.HomeHoteData;
 import com.coldraincn.laimihui.entity.Lactivity;
 import com.coldraincn.laimihui.entity.ListMessage;
 import com.coldraincn.laimihui.entity.MessageCode;
@@ -45,23 +46,26 @@ public class DataManager {
     public Observable<Lactivity> getActivityList(String token){
         return mRetrofitService.getActivityList(token);
     }
-    public Observable<TodayExplosion> getTodayExplosionList(String token){
-        return mRetrofitService.getTodayExplosionList(token);
+//    public Observable<TodayExplosion> getTodayExplosionList(String token){
+//        return mRetrofitService.getTodayExplosionList(token);
+//    }
+//    public Observable<FreshOnLine> getExcellentFreshOnLineList(String token){
+//        return mRetrofitService.getExcellentFreshOnLineList(token);
+//    }
+//    public Observable<SeasonSell> getSeasonSellList(String token){
+//        return mRetrofitService.getSeasonSellList(token);
+//    }
+//    public Observable<VipProduct> getVipProductList(String token){
+//        return mRetrofitService.getVipProductList(token);
+//    }
+//    public Observable<SelectTopic> getSelectTopicList(String token){
+//        return mRetrofitService.getSelectTopicList(token);
+//    }
+    public Observable<HomeHoteData> getHomeHoteList(String token){
+        return mRetrofitService.getHomeHoteList(token);
     }
-    public Observable<FreshOnLine> getExcellentFreshOnLineList(String token){
-        return mRetrofitService.getExcellentFreshOnLineList(token);
-    }
-    public Observable<SeasonSell> getSeasonSellList(String token){
-        return mRetrofitService.getSeasonSellList(token);
-    }
-    public Observable<VipProduct> getVipProductList(String token){
-        return mRetrofitService.getVipProductList(token);
-    }
-    public Observable<SelectTopic> getSelectTopicList(String token){
-        return mRetrofitService.getSelectTopicList(token);
-    }
-    public Observable<Product> getProductList(String token){
-        return mRetrofitService.getProductList(token);
+    public Observable<Product> getProductList(String token, String pageNo , String pageSize){
+        return mRetrofitService.getProductList(token,pageNo,pageSize);
     }
     public Observable<ListMessage> getlistMessage(String token,String communityOid){
         return mRetrofitService.getlistMessage(token,communityOid);

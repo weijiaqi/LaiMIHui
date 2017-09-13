@@ -9,4 +9,6 @@
     <color name="red">#FF0000</color>
     <color name="green">#ff99cc00</color>
     <color name="black">#95222222</color>
+    <color name="text_ce0c15">#ce0c15</color>
+    <color name="text_333333">#333333</color>
 </resources>

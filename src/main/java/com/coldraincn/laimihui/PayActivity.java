@@ -35,6 +35,7 @@ public class PayActivity extends AppCompatActivity {
 
     private String newPrice;
     private String payNotifyUrl;
+    private String orderno;
 
     @BindView(R.id.relativeLayout)
     RelativeLayout relativeLayout;
@@ -91,7 +92,7 @@ public class PayActivity extends AppCompatActivity {
                         AliPayReq aliPayReq = new AliPayReq.Builder()
                                 .with(PayActivity.this)//Activity实例
                                 .apply(config)//支付宝支付通用配置
-                                .setOutTradeNo(getOutTradeNo())//设置唯一订单号
+                                .setOutTradeNo(orderno)//设置唯一订单号
                                 .setPrice(newPrice)//设置订单价格
                                 .setSubject("来米汇")//设置订单标题
                                 .setBody("来米汇订单支付")//设置订单内容 订单详情
@@ -119,10 +120,11 @@ public class PayActivity extends AppCompatActivity {
         textView8.setText(mOrder.getData().getOrderNo());
         textView10.setText(mOrder.getData().getMoney());
         payNotifyUrl=mOrder.getData().getPayNotifyUrl();
+        orderno=mOrder.getData().getOrderNo();
 
         String price = mOrder.getData().getMoney();
         double priceValue = Double.parseDouble(price);
-        int cents = (int)(priceValue * 100);
+        int cents = (int)(priceValue);
         newPrice = Integer.toString(cents);
 
         paytype.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -139,16 +141,7 @@ public class PayActivity extends AppCompatActivity {
             }
         });
     }
-    private String getOutTradeNo() {
-        SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss", Locale.getDefault());
-        Date date = new Date();
-        String key = format.format(date);
 
-        Random r = new Random();
-        key = key + r.nextInt();
-        key = key.substring(0, 15);
-        return key;
-    }
     private AliPayReq.OnAliPayListener alires= new AliPayReq.OnAliPayListener(){
 
         @Override

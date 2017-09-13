@@ -120,4 +120,10 @@ public class ProductDetailActivity extends AppCompatActivity {
                 "</head>";
         return "<html>" + head + "<body>" + bodyHTML + "</body></html>";
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        mProductDetailPresenter.onStop();
+    }
 }

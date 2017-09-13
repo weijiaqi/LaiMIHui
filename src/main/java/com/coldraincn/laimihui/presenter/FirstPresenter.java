@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.coldraincn.laimihui.entity.FreshOnLine;
+import com.coldraincn.laimihui.entity.HomeHoteData;
 import com.coldraincn.laimihui.entity.Lactivity;
 import com.coldraincn.laimihui.entity.Product;
 import com.coldraincn.laimihui.entity.SeasonSell;
@@ -35,12 +36,8 @@ public class FirstPresenter implements BasePresenter {
     private CompositeDisposable mCompositeDisposable;
     private Context mContext;
     private FirstView mFirstView;
-    private Lactivity mLactivity;
-    private TodayExplosion mTodayExplosion;
-    private FreshOnLine mFreshOnLine;
-    private SeasonSell mSeasonSell;
-    private VipProduct mVipProduct;
-    private SelectTopic mSelectTopic;
+
+    private HomeHoteData mHomeHoteData;
     private Product mProduct;
     public FirstPresenter (Context mContext){
         this.mContext = mContext;
@@ -77,39 +74,39 @@ public class FirstPresenter implements BasePresenter {
     public void attachIncomingIntent(Intent intent) {
 
     }
-    public void getActivityList(String token){
-        Observable<Lactivity> observable= manager.getActivityList(token);
-        DisposableObserver<Lactivity> observer = new DisposableObserver<Lactivity>() {
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-                mFirstView.onError("请求失败！！");
-            }
-
-            @Override
-            public void onComplete() {
-                if (mLactivity != null){
-                    //mFirstView.onSuccess(mLactivity);
-                    ArrayList images=getimages(mLactivity);
-                    mFirstView.onLoadActivityList(images);
-                }
-            }
-
-
-
-            @Override
-            public void onNext(Lactivity lactivity) {
-                mLactivity = lactivity;
-            }
-        };
-
-
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-
-        mCompositeDisposable.add(observer);
-    }
+//    public void getActivityList(String token){
+//        Observable<Lactivity> observable= manager.getActivityList(token);
+//        DisposableObserver<Lactivity> observer = new DisposableObserver<Lactivity>() {
+//            @Override
+//            public void onError(Throwable e) {
+//                e.printStackTrace();
+//                mFirstView.onError("请求失败！！");
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//                if (mLactivity != null){
+//                    //mFirstView.onSuccess(mLactivity);
+//                    ArrayList images=getimages(mLactivity);
+//                    mFirstView.onLoadActivityList(images);
+//                }
+//            }
+//
+//
+//
+//            @Override
+//            public void onNext(Lactivity lactivity) {
+//                mLactivity = lactivity;
+//            }
+//        };
+//
+//
+//        observable.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(observer);
+//
+//        mCompositeDisposable.add(observer);
+//    }
     private ArrayList getimages(Lactivity lactivity){
         ArrayList images=new ArrayList();
         for (int i = 0; i < lactivity.getData().size(); i++) {
@@ -123,7 +120,7 @@ public class FirstPresenter implements BasePresenter {
 
         return images;
     }
-//    private ArrayList getimages1(TodayExplosion data){
+    //    private ArrayList getimages1(TodayExplosion data){
 //        ArrayList images=new ArrayList();
 //        for (int i = 0; i < data.getData().size(); i++) {
 //
@@ -136,9 +133,9 @@ public class FirstPresenter implements BasePresenter {
 //
 //        return images;
 //    }
-    public void getTodayExplosionList(String token){
-        Observable<TodayExplosion> observable= manager.getTodayExplosionList(token);
-        DisposableObserver<TodayExplosion> observer = new DisposableObserver<TodayExplosion>() {
+    public void getHomeHoteList(String token){
+        Observable<HomeHoteData> observable= manager.getHomeHoteList(token);
+        DisposableObserver<HomeHoteData> observer = new DisposableObserver<HomeHoteData>() {
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
@@ -147,8 +144,8 @@ public class FirstPresenter implements BasePresenter {
 
             @Override
             public void onComplete() {
-                if (mLactivity != null){
-                    mFirstView.onSuccess1(mTodayExplosion);
+                if (mHomeHoteData != null){
+                    mFirstView.onSuccess7(mHomeHoteData);
 
                 }
             }
@@ -156,8 +153,8 @@ public class FirstPresenter implements BasePresenter {
 
 
             @Override
-            public void onNext(TodayExplosion entity) {
-                mTodayExplosion = entity;
+            public void onNext(HomeHoteData entity) {
+                mHomeHoteData = entity;
             }
         };
 
@@ -168,136 +165,8 @@ public class FirstPresenter implements BasePresenter {
 
         mCompositeDisposable.add(observer);
     }
-    public void getExcellentFreshOnLineList(String token){
-        Observable<FreshOnLine> observable= manager.getExcellentFreshOnLineList(token);
-        DisposableObserver<FreshOnLine> observer = new DisposableObserver<FreshOnLine>() {
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-                mFirstView.onError("请求失败！！");
-            }
-
-            @Override
-            public void onComplete() {
-                if (mLactivity != null){
-                    mFirstView.onSuccess2(mFreshOnLine);
-
-                }
-            }
-
-
-
-            @Override
-            public void onNext(FreshOnLine entity) {
-                mFreshOnLine = entity;
-            }
-        };
-
-
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-
-        mCompositeDisposable.add(observer);
-    }
-    public void getSeasonSellList(String token){
-        Observable<SeasonSell> observable= manager.getSeasonSellList(token);
-        DisposableObserver<SeasonSell> observer = new DisposableObserver<SeasonSell>() {
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-                mFirstView.onError("请求失败！！");
-            }
-
-            @Override
-            public void onComplete() {
-                if (mLactivity != null){
-                    mFirstView.onSuccess3(mSeasonSell);
-
-                }
-            }
-
-
-
-            @Override
-            public void onNext(SeasonSell entity) {
-                mSeasonSell = entity;
-            }
-        };
-
-
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-
-        mCompositeDisposable.add(observer);
-    }
-    public void getVipProductList(String token){
-        Observable<VipProduct> observable= manager.getVipProductList(token);
-        DisposableObserver<VipProduct> observer = new DisposableObserver<VipProduct>() {
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-                mFirstView.onError("请求失败！！");
-            }
-
-            @Override
-            public void onComplete() {
-                if (mLactivity != null){
-                    mFirstView.onSuccess4(mVipProduct);
-
-                }
-            }
-
-
-
-            @Override
-            public void onNext(VipProduct entity) {
-                mVipProduct = entity;
-            }
-        };
-
-
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-
-        mCompositeDisposable.add(observer);
-    }
-    public void getSelectTopicList(String token){
-        Observable<SelectTopic> observable= manager.getSelectTopicList(token);
-        DisposableObserver<SelectTopic> observer = new DisposableObserver<SelectTopic>() {
-            @Override
-            public void onError(Throwable e) {
-                e.printStackTrace();
-                mFirstView.onError("请求失败！！");
-            }
-
-            @Override
-            public void onComplete() {
-                if (mLactivity != null){
-                    mFirstView.onSuccess5(mSelectTopic);
-
-                }
-            }
-
-
-
-            @Override
-            public void onNext(SelectTopic entity) {
-                mSelectTopic = entity;
-            }
-        };
-
-
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-
-        mCompositeDisposable.add(observer);
-    }
-    public void getProductList(String token){
-        Observable<Product> observable= manager.getProductList(token);
+    public void getProductList(String token, String pageNo, String pageSize){
+        Observable<Product> observable= manager.getProductList(token,pageNo,pageSize);
         DisposableObserver<Product> observer = new DisposableObserver<Product>() {
             @Override
             public void onError(Throwable e) {
@@ -307,7 +176,7 @@ public class FirstPresenter implements BasePresenter {
 
             @Override
             public void onComplete() {
-                if (mLactivity != null){
+                if (mProduct != null){
                     mFirstView.onSuccess6(mProduct);
 
                 }
