@@ -31,7 +31,7 @@ public class WeixinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weixin);
         ButterKnife.bind(this);
-
+        getSupportActionBar().hide();
 
 
     }

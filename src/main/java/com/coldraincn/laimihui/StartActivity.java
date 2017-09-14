@@ -39,38 +39,38 @@ public class StartActivity extends AppCompatActivity {
 
 //
 //
-        Intent intent = new Intent (StartActivity.this,MainActivity.class);
-        startActivity(intent);
-        StartActivity.this.finish();
+//        Intent intent = new Intent (StartActivity.this,MainActivity.class);
+//        startActivity(intent);
+//        StartActivity.this.finish();
 
 
-//
-//        SharedPreferences settings = getSharedPreferences(PREFUSER, 0);
-//        String token = settings.getString(PREF_CELL, "");
-//
-//            if (!"".equals(token)) {
-//                new Handler().postDelayed(new Runnable(){
-//                    public void run(){
-//
-//
-//                        Intent intent = new Intent (StartActivity.this,MainActivity.class);
-//                        startActivity(intent);
-//                        StartActivity.this.finish();
-//                    }
-//                }, 1000);
-//
-//            }
-//            else {
-//                new Handler().postDelayed(new Runnable(){
-//                    public void run(){
-//
-//
-//                        Intent intent = new Intent(StartActivity.this,LoginActivity.class);
-//                        startActivity(intent);
-//                        StartActivity.this.finish();
-//                    }
-//                }, 1000);
-//            }
+
+        SharedPreferences settings = getSharedPreferences(PREFUSER, 0);
+        String token = settings.getString(PREF_CELL, "");
+
+            if (!"".equals(token)) {
+                new Handler().postDelayed(new Runnable(){
+                    public void run(){
+
+
+                        Intent intent = new Intent (StartActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        StartActivity.this.finish();
+                    }
+                }, 1000);
+
+            }
+            else {
+                new Handler().postDelayed(new Runnable(){
+                    public void run(){
+
+
+                        Intent intent = new Intent(StartActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                        StartActivity.this.finish();
+                    }
+                }, 1000);
+            }
 //
 //
      }

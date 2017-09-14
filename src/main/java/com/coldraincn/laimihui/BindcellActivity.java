@@ -77,6 +77,7 @@ public class BindcellActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bindcell);
         ButterKnife.bind(this);
+        getSupportActionBar().hide();
         mBindcellPresenter.onCreate();
         mBindcellPresenter.attachView(mBindcellView);
         SharedPreferences settings = getSharedPreferences(PREFUSER, 0);

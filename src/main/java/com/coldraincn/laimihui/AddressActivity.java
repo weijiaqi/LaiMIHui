@@ -1,5 +1,6 @@
 package com.coldraincn.laimihui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -89,7 +90,14 @@ public class AddressActivity extends AppCompatActivity {
         mAddressAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder viewHolder, int position) {
-                AddressModifyActivity.start(AddressActivity.this, mAddressList.get(position).getObjectId());
+                if (getIntent().getBooleanExtra("select", false)){
+                    Intent intent = new Intent();
+                    intent.putExtra("address",mAddressList.get(position));
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } else {
+                    AddressModifyActivity.start(AddressActivity.this, mAddressList.get(position).getObjectId());
+                }
             }
         });
     }

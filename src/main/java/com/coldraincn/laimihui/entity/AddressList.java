@@ -1,5 +1,6 @@
 package com.coldraincn.laimihui.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  *          Create by 2017/9/11 13:41
  */
 
-public class AddressList {
+public class AddressList implements Serializable{
     private String status;
     private List<DataBean> data;
 
@@ -32,7 +33,7 @@ public class AddressList {
         this.data = data;
     }
 
-    public class DataBean{
+    public class DataBean implements Serializable{
         /**
          * areaCode : 110108
          * cityCode : 110100

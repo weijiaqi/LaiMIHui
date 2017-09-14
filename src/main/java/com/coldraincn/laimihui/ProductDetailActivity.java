@@ -294,6 +294,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
         ButterKnife.bind(this);
+        getSupportActionBar().hide();
         //web.loadData(getHtmlData(html), "text/html; charset=UTF-8", null);
 //        /////////获取数据
         SharedPreferences settings = getSharedPreferences(PREFUSER, 0);

@@ -62,9 +62,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_info_text"
                     android:layout_marginLeft="50dp"
-                    android:text="收货人:XXX" />
+                    android:text="收货人:" />
 
                 <TextView
+                    android:id="@+id/tv_cell"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -89,7 +90,7 @@
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="40dp"
                     android:layout_marginTop="10dp"
-                    android:text="收货地址：北京市海淀区上帝十街辉煌国际大厦1号院5号楼" />
+                    android:text="收货地址：无收货地址" />
 
                 <ImageView
                     android:layout_width="wrap_content"
