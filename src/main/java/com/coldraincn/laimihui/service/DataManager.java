@@ -9,6 +9,7 @@ import com.coldraincn.laimihui.entity.AddressList;
 import com.coldraincn.laimihui.entity.Area;
 import com.coldraincn.laimihui.entity.BindPhone;
 import com.coldraincn.laimihui.entity.COrderlist;
+import com.coldraincn.laimihui.entity.DefaltAddress;
 import com.coldraincn.laimihui.entity.DeleteAddress;
 import com.coldraincn.laimihui.entity.FreshOnLine;
 import com.coldraincn.laimihui.entity.GetAddress;
@@ -95,7 +96,7 @@ public class DataManager {
         return mRetrofitService.createOrder(token,productOid,addressOid,communityOid,
                 tradeCount,spbillCreateIp,freight,orderRemark);
     }
-    public Observable<Address> getDefaultAddress(String token){
+    public Observable<DefaltAddress> getDefaultAddress(String token){
         return mRetrofitService.getDefaultAddress(token);
     }
     public Observable<OrderList> getUserOrderList(String token, String orderStatus){

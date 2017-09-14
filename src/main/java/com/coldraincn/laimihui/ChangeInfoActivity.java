@@ -29,6 +29,7 @@ public class ChangeInfoActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_info);
+        getSupportActionBar().hide();
         SharedPreferences settings = getSharedPreferences(PREFUSER, 0);
         token = settings.getString(PREF_TOKEN, "1");
         et_name = (EditText) findViewById(R.id.et_name);

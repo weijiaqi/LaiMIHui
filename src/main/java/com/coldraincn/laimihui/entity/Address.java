@@ -1,160 +1,122 @@
 package com.coldraincn.laimihui.entity;
 
 /**
- * Created by hd on 2017/9/12.
+ * <Pre>
+ * TODO 描述该文件做什么
+ * </Pre>
+ *
+ * @author 刘阳
+ * @version 1.0
+ *          <p>
+ *          Create by 2017/9/11 17:08
  */
 
 public class Address {
+    private String receiverName;//	string	//Y	收货人姓名
+    private String receiverPhoneNo;//	String	//Y	收货人手机号
+    private String receiverAddress;//	string	//Y	详细地址
+    private int isDefault;//	Int	//Y	是否是默认地址
+    private String postCode;//String;	//Y	邮编
+    private int provinceCode;//	Int	//Y	省代码
+    private int cityCode;//	Int	//Y	城市代码
+    private int areaCode;//	Int	//Y	县区
+    private String province;//	Int	//Y	省
+    private String city;//	Int	//Y	城市
+    private String area;//	Int	//Y	县区
+    private long objectId;//	Int	//Y	县区代码
 
-    /**
-     * status : OK
-     * data : {"area":"","areaCode":110101,"city":"","cityCode":110100,"isDefault":"1","objectId":608353049428800,"postCode":"1000091","province":"","provinceCode":110000,"receiverAddress":"北京市海淀区中关村南大街","receiverName":"赵宝","receiverPhoneNo":"13522890823"}
-     */
-
-    private String status;
-    private DataBean data;
-
-    public String getStatus() {
-        return status;
+    public String getProvince() {
+        return province;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
-    public DataBean getData() {
-        return data;
+    public String getCity() {
+        return city;
     }
 
-    public void setData(DataBean data) {
-        this.data = data;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public static class DataBean {
-        /**
-         * area :
-         * areaCode : 110101
-         * city :
-         * cityCode : 110100
-         * isDefault : 1
-         * objectId : 608353049428800
-         * postCode : 1000091
-         * province :
-         * provinceCode : 110000
-         * receiverAddress : 北京市海淀区中关村南大街
-         * receiverName : 赵宝
-         * receiverPhoneNo : 13522890823
-         */
+    public String getArea() {
+        return area;
+    }
 
-        private String area;
-        private int areaCode;
-        private String city;
-        private int cityCode;
-        private int isDefault;
-        private long objectId;
-        private String postCode;
-        private String province;
-        private int provinceCode;
-        private String receiverAddress;
-        private String receiverName;
-        private String receiverPhoneNo;
+    public void setArea(String area) {
+        this.area = area;
+    }
 
+    public long getObjectId() {
+        return objectId;
+    }
+    public void setObjectId(long objectId) {
+        this.objectId = objectId;
+    }
 
+    public String getReceiverName() {
+        return receiverName;
+    }
 
-        public String getArea() {
-            return area;
-        }
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
 
-        public void setArea(String area) {
-            this.area = area;
-        }
+    public String getReceiverPhoneNo() {
+        return receiverPhoneNo;
+    }
 
-        public int getAreaCode() {
-            return areaCode;
-        }
+    public void setReceiverPhoneNo(String receiverPhoneNo) {
+        this.receiverPhoneNo = receiverPhoneNo;
+    }
 
-        public void setAreaCode(int areaCode) {
-            this.areaCode = areaCode;
-        }
+    public String getReceiverAddress() {
+        return receiverAddress;
+    }
 
-        public String getCity() {
-            return city;
-        }
+    public void setReceiverAddress(String receiverAddress) {
+        this.receiverAddress = receiverAddress;
+    }
 
-        public void setCity(String city) {
-            this.city = city;
-        }
+    public int getIsDefault() {
+        return isDefault;
+    }
 
-        public int getCityCode() {
-            return cityCode;
-        }
+    public void setIsDefault(int isDefault) {
+        this.isDefault = isDefault;
+    }
 
-        public void setCityCode(int cityCode) {
-            this.cityCode = cityCode;
-        }
+    public String getPostCode() {
+        return postCode;
+    }
 
-        public int getIsDefault() {
-            return isDefault;
-        }
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
 
-        public void setIsDefault(int isDefault) {
-            this.isDefault = isDefault;
-        }
+    public int getProvinceCode() {
+        return provinceCode;
+    }
 
-        public long getObjectId() {
-            return objectId;
-        }
+    public void setProvinceCode(int provinceCode) {
+        this.provinceCode = provinceCode;
+    }
 
-        public void setObjectId(long objectId) {
-            this.objectId = objectId;
-        }
+    public int getCityCode() {
+        return cityCode;
+    }
 
-        public String getPostCode() {
-            return postCode;
-        }
+    public void setCityCode(int cityCode) {
+        this.cityCode = cityCode;
+    }
 
-        public void setPostCode(String postCode) {
-            this.postCode = postCode;
-        }
+    public int getAreaCode() {
+        return areaCode;
+    }
 
-        public String getProvince() {
-            return province;
-        }
-
-        public void setProvince(String province) {
-            this.province = province;
-        }
-
-        public int getProvinceCode() {
-            return provinceCode;
-        }
-
-        public void setProvinceCode(int provinceCode) {
-            this.provinceCode = provinceCode;
-        }
-
-        public String getReceiverAddress() {
-            return receiverAddress;
-        }
-
-        public void setReceiverAddress(String receiverAddress) {
-            this.receiverAddress = receiverAddress;
-        }
-
-        public String getReceiverName() {
-            return receiverName;
-        }
-
-        public void setReceiverName(String receiverName) {
-            this.receiverName = receiverName;
-        }
-
-        public String getReceiverPhoneNo() {
-            return receiverPhoneNo;
-        }
-
-        public void setReceiverPhoneNo(String receiverPhoneNo) {
-            this.receiverPhoneNo = receiverPhoneNo;
-        }
+    public void setAreaCode(int areaCode) {
+        this.areaCode = areaCode;
     }
 }

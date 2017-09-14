@@ -17,7 +17,7 @@ public class PaySuccessActivity extends AppCompatActivity {
     Button button7;
 
     @OnClick(R.id.button7)
-    private  void queding(){
+    public  void queding(){
         PaySuccessActivity.this.finish();
     }
 

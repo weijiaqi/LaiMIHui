@@ -30,6 +30,7 @@ import com.coldraincn.laimihui.Alipay.PayResult;
 import com.coldraincn.laimihui.Alipay.SignUtils;
 import com.coldraincn.laimihui.entity.Address;
 import com.coldraincn.laimihui.entity.BindPhone;
+import com.coldraincn.laimihui.entity.DefaltAddress;
 import com.coldraincn.laimihui.entity.MessageCode;
 import com.coldraincn.laimihui.entity.ProductDetail;
 import com.coldraincn.laimihui.entity.createOrder;
@@ -76,10 +77,9 @@ public class OrderconfirmActivity extends AppCompatActivity {
 
 
     private static final int SDK_PAY_FLAG = 1;
-    private String sumprice;
-    private int flag = 0;
+
     private ProductDetail mProductDetail;
-    private String num;
+
 
     @BindView(R.id.tv_info_text)
     TextView tvInfoText;
@@ -156,12 +156,21 @@ public class OrderconfirmActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         mProductDetail = (ProductDetail) bundle.getSerializable("productDetail");
         tradeCount = (String) bundle.getString("num");
+        int num = Integer.parseInt(tradeCount);
+        Double sunmoney=mProductDetail.getData().getShowSalePrice()*num;
+
 
         productnum.setText("数量："+tradeCount+"个");
         productprice.setText(String.valueOf(mProductDetail.getData().getShowSalePrice())+"元");
         productname.setText(mProductDetail.getData().getProductName());
         Picasso.with(OrderconfirmActivity.this).load(mProductDetail.getData().getCoverId()).into(ivProductImage);
-        yingfu.setText(String.valueOf(mProductDetail.getData().getShowSalePrice())+"元");
+        shangpinjie.setText("商品金额"+sunmoney+"元");
+        youhuijie.setText("优惠金额:00.00");
+        yunfei.setText("运费金额:00.00");
+        zongjine.setText("总金额:00.00"+sunmoney+"元");
+
+
+        yingfu.setText(sunmoney+"元");
         productOid=String.valueOf(mProductDetail.getData().getObjectId());
 
         mOrderconfirmPresenter.onCreate();
@@ -219,7 +228,7 @@ public class OrderconfirmActivity extends AppCompatActivity {
     private OrderconfirmView mOrderconfirmView = new OrderconfirmView() {
 
         @Override
-        public void onAddress(Address result) {
+        public void onAddress(DefaltAddress result) {
             addressOid=String.valueOf(result.getData().getObjectId());
             tvCollectAddress.setText("收货地址："+result.getData().getReceiverAddress());
         }

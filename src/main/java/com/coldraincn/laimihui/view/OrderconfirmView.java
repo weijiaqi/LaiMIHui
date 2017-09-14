@@ -1,6 +1,7 @@
 package com.coldraincn.laimihui.view;
 
 import com.coldraincn.laimihui.entity.Address;
+import com.coldraincn.laimihui.entity.DefaltAddress;
 import com.coldraincn.laimihui.entity.MessageCode;
 import com.coldraincn.laimihui.entity.User;
 import com.coldraincn.laimihui.entity.createOrder;
@@ -11,7 +12,7 @@ import com.coldraincn.laimihui.presenter.BasePresenter;
  */
 
 public interface OrderconfirmView extends BaseView{
-    void onAddress(Address result);
+    void onAddress(DefaltAddress result);
     void onError(String result);
     void onCreateOrder(createOrder result);
 }

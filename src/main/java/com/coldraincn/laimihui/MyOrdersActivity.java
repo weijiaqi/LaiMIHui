@@ -41,11 +41,11 @@ public class MyOrdersActivity extends AppCompatActivity
 
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
+       // setSupportActionBar(toolbar);
 
         toolbar.setNavigationIcon(R.mipmap.arrow);
 
-        getSupportActionBar().setTitle("");
+       getSupportActionBar().hide();
 
         titleView.setText("我的订单");
 
@@ -79,7 +79,7 @@ public class MyOrdersActivity extends AppCompatActivity
         {
             super(fm);
 
-            pageList.add(OrdersFragment.newInstance(null));
+            pageList.add(OrdersFragment.newInstance("0"));
 
             titleList.add("全部订单");
 

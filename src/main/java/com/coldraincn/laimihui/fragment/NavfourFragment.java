@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.coldraincn.laimihui.AddressActivity;
+import com.coldraincn.laimihui.ChangeInfoActivity;
 import com.coldraincn.laimihui.LoginActivity;
 import com.coldraincn.laimihui.MyOrdersActivity;
 import com.coldraincn.laimihui.R;
@@ -94,6 +96,20 @@ public class NavfourFragment extends Fragment {
     @OnClick(R.id.myorders)
     public void setMyorders() {
         Intent intent = new Intent (getActivity(),MyOrdersActivity.class);
+        startActivity(intent);
+
+
+    }
+    @OnClick(R.id.myinfo)
+    public void myinfo() {
+        Intent intent = new Intent (getActivity(),ChangeInfoActivity.class);
+        startActivity(intent);
+
+
+    }
+    @OnClick(R.id.myaddress)
+    public void address() {
+        Intent intent = new Intent (getActivity(),AddressActivity.class);
         startActivity(intent);
 
 

@@ -110,11 +110,11 @@ public class AddressModifyPresenter implements BasePresenter{
         mCompositeDisposable.add(observer);
     }
     public void updateAddress(String token, Address address){
-        Observable<UpdateAddress> observable= mManager.updateAddress(token, address.getData().getObjectId(),
-                address.getData().getReceiverName(), address.getData().getReceiverPhoneNo(),
-                address.getData().getReceiverAddress(), address.getData().getIsDefault(), address.getData().getPostCode(),
-                address.getData().getProvinceCode(), address.getData().getCityCode(),
-                address.getData().getAreaCode());
+        Observable<UpdateAddress> observable= mManager.updateAddress(token, address.getObjectId(),
+                address.getReceiverName(), address.getReceiverPhoneNo(),
+                address.getReceiverAddress(), address.getIsDefault(), address.getPostCode(),
+                address.getProvinceCode(), address.getCityCode(),
+                address.getAreaCode());
         DisposableObserver<UpdateAddress> observer = new DisposableObserver<UpdateAddress>() {
             @Override
             public void onError(Throwable e) {

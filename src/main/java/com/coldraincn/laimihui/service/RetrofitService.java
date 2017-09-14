@@ -7,6 +7,7 @@ import com.coldraincn.laimihui.entity.AddressList;
 import com.coldraincn.laimihui.entity.Area;
 import com.coldraincn.laimihui.entity.BindPhone;
 import com.coldraincn.laimihui.entity.COrderlist;
+import com.coldraincn.laimihui.entity.DefaltAddress;
 import com.coldraincn.laimihui.entity.DeleteAddress;
 import com.coldraincn.laimihui.entity.FreshOnLine;
 import com.coldraincn.laimihui.entity.GetAddress;
@@ -102,11 +103,11 @@ public interface RetrofitService {
                                         @Field("orderRemark") String orderRemark);
 
     //订单列表
-    @POST("order/getUserOrderList.do")
+    @POST("order/getUserOrderStatusList.do")
     Observable<OrderList> getUserOrderList(@Header("token") String token, @Query("orderStatus") String orderStatus);
     //获取默认地址
     @GET("address/getDefaultAddress.do")
-    Observable<Address> getDefaultAddress(@Header("token") String token);
+    Observable<DefaltAddress> getDefaultAddress(@Header("token") String token);
 
     @FormUrlEncoded
     @POST("cashAccount/saveNewPhone.do")

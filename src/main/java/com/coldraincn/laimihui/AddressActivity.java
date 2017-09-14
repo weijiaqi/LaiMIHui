@@ -74,6 +74,7 @@ public class AddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         ButterKnife.bind(this);
+        getSupportActionBar().hide();
         SharedPreferences settings = getSharedPreferences(PREFUSER, 0);
         token = settings.getString(PREF_TOKEN, "1");
         mAddressPresenter.onCreate();

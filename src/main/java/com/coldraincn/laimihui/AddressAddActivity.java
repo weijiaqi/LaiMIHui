@@ -92,14 +92,14 @@ public class AddressAddActivity extends AppCompatActivity{
             return;
         }
         Address address = new Address();
-        address.getData().setAreaCode(areaCode);
-        address.getData().setCityCode(cityCode);
-        address.getData().setProvinceCode(provinceCode);
-        address.getData().setIsDefault(isDefault);
-        address.getData().setPostCode("000000");
-        address.getData().setReceiverAddress(detailAddress);
-        address.getData().setReceiverName(name);
-        address.getData().setReceiverPhoneNo(phone);
+        address.setAreaCode(areaCode);
+        address.setCityCode(cityCode);
+        address.setProvinceCode(provinceCode);
+        address.setIsDefault(isDefault);
+        address.setPostCode("000000");
+        address.setReceiverAddress(detailAddress);
+        address.setReceiverName(name);
+        address.setReceiverPhoneNo(phone);
         mAddressAddPresenter.addAddress(token, address);
     }
 

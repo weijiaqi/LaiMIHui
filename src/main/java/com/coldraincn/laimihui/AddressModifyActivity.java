@@ -103,15 +103,15 @@ public class AddressModifyActivity extends AppCompatActivity {
                     return;
                 }
                 Address address = new Address();
-                address.getData().setObjectId(mAddressId);
-                address.getData().setAreaCode(areaCode);
-                address.getData().setCityCode(cityCode);
-                address.getData().setProvinceCode(provinceCode);
-                address.getData().setIsDefault(isDefault);
-                address.getData().setPostCode("000000");
-                address.getData().setReceiverAddress(detailAddress);
-                address.getData().setReceiverName(name);
-                address.getData().setReceiverPhoneNo(phone);
+                address.setObjectId(mAddressId);
+                address.setAreaCode(areaCode);
+                address.setCityCode(cityCode);
+                address.setProvinceCode(provinceCode);
+                address.setIsDefault(isDefault);
+                address.setPostCode("000000");
+                address.setReceiverAddress(detailAddress);
+                address.setReceiverName(name);
+                address.setReceiverPhoneNo(phone);
                 mAddressModifyPresenter.updateAddress(token, address);
             }
         }).setNegativeButton("取消", null).show();
@@ -140,16 +140,16 @@ public class AddressModifyActivity extends AppCompatActivity {
             if (address == null) {
                 return;
             }
-            provinceCode = address.getData().getProvinceCode();
-            cityCode = address.getData().getCityCode();
-            areaCode = address.getData().getAreaCode();
-            isDefault = address.getData().getIsDefault();
-            et_name.setText(address.getData().getReceiverName());
-            et_detail_address.setText(address.getData().getReceiverAddress());
-            et_phone.setText(address.getData().getReceiverPhoneNo());
-            et_phone.setText(address.getData().getReceiverPhoneNo());
-            cb_default.setChecked(address.getData().getIsDefault() == 0 ? false : true);
-            tv_address_select.setText(address.getData().getProvince() + " " + address.getData().getCity() + " "  + address.getData().getArea());
+            provinceCode = address.getProvinceCode();
+            cityCode = address.getCityCode();
+            areaCode = address.getAreaCode();
+            isDefault = address.getIsDefault();
+            et_name.setText(address.getReceiverName());
+            et_detail_address.setText(address.getReceiverAddress());
+            et_phone.setText(address.getReceiverPhoneNo());
+            et_phone.setText(address.getReceiverPhoneNo());
+            cb_default.setChecked(address.getIsDefault() == 0 ? false : true);
+            tv_address_select.setText(address.getProvince() + " " + address.getCity() + " "  + address.getArea());
         }
 
         @Override

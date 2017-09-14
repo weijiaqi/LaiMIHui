@@ -44,11 +44,11 @@ public class UserOrderDetailActivity extends AppCompatActivity
 
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
+      //  setSupportActionBar(toolbar);
 
         toolbar.setNavigationIcon(R.mipmap.arrow);
 
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().hide();
 
         titleView.setText("订单详情");
 

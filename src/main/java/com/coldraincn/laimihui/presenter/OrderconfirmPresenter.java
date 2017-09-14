@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.coldraincn.laimihui.entity.Address;
 import com.coldraincn.laimihui.entity.BindPhone;
+import com.coldraincn.laimihui.entity.DefaltAddress;
 import com.coldraincn.laimihui.entity.MessageCode;
 import com.coldraincn.laimihui.entity.createOrder;
 import com.coldraincn.laimihui.service.DataManager;
@@ -27,7 +28,7 @@ public class OrderconfirmPresenter implements BasePresenter {
     private CompositeDisposable mCompositeDisposable;
     private Context mContext;
     private OrderconfirmView mOrderconfirmView;
-    private Address mAddress;
+    private DefaltAddress mAddress;
     private createOrder mcreateOrder;
     public OrderconfirmPresenter (Context mContext){
         this.mContext = mContext;
@@ -69,8 +70,8 @@ public class OrderconfirmPresenter implements BasePresenter {
 
     }
     public void getDefaltAddress(String token){
-        Observable<Address> observable= manager.getDefaultAddress(token);
-        DisposableObserver<Address> observer = new DisposableObserver<Address>() {
+        Observable<DefaltAddress> observable= manager.getDefaultAddress(token);
+        DisposableObserver<DefaltAddress> observer = new DisposableObserver<DefaltAddress>() {
             @Override
             public void onError(Throwable e) {
                 e.printStackTrace();
@@ -87,7 +88,7 @@ public class OrderconfirmPresenter implements BasePresenter {
 
 
             @Override
-            public void onNext(Address data) {
+            public void onNext(DefaltAddress data) {
                 mAddress = data;
             }
         };

@@ -123,9 +123,9 @@ public class PayActivity extends AppCompatActivity {
         orderno=mOrder.getData().getOrderNo();
 
         String price = mOrder.getData().getMoney();
-        double priceValue = Double.parseDouble(price);
-        int cents = (int)(priceValue);
-        newPrice = Integer.toString(cents);
+
+        //int cents = Integer.parseInt(price);
+        newPrice =  price;
 
         paytype.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -140,6 +140,16 @@ public class PayActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private String getOutTradeNo() {
+        SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss", Locale.getDefault());
+        Date date = new Date();
+        String key = format.format(date);
+
+        Random r = new Random();
+        key = key + r.nextInt();
+        key = key.substring(0, 15);
+        return key;
     }
 
     private AliPayReq.OnAliPayListener alires= new AliPayReq.OnAliPayListener(){

@@ -101,10 +101,10 @@ public class AddressAddPresenter implements BasePresenter{
     }
 
     public void addAddress(String token, Address address){
-        Observable<AddAddress> observable= mManager.addAddress(token, address.getData().getReceiverName(), address.getData().getReceiverPhoneNo(),
-                address.getData().getReceiverAddress(), address.getData().getIsDefault(), address.getData().getPostCode(),
-                address.getData().getProvinceCode(), address.getData().getCityCode(),
-                address.getData().getAreaCode());
+        Observable<AddAddress> observable= mManager.addAddress(token, address.getReceiverName(), address.getReceiverPhoneNo(),
+                address.getReceiverAddress(), address.getIsDefault(), address.getPostCode(),
+                address.getProvinceCode(), address.getCityCode(),
+                address.getAreaCode());
         DisposableObserver<AddAddress> observer = new DisposableObserver<AddAddress>() {
             @Override
             public void onError(Throwable e) {
