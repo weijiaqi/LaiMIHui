@@ -112,7 +112,8 @@
         <activity
             android:name=".AddressModifyActivity"
             android:label="@string/title_activity_address_modify"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SelectTopic"></activity>
     </application>
 
 </manifest>

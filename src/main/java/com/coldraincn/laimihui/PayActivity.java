@@ -115,6 +115,7 @@ public class PayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
         ButterKnife.bind(this);
+        getSupportActionBar().hide();
         Bundle bundle = this.getIntent().getExtras();
         mOrder = (createOrder) bundle.getSerializable("createOrder");
         textView8.setText(mOrder.getData().getOrderNo());

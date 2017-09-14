@@ -26,5 +26,6 @@ public class PaySuccessActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_success);
         ButterKnife.bind(this);
+        getSupportActionBar().hide();
     }
 }
