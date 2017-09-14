@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     //这里需要添加到最前边，后边的才能收到，貌似gradle没成员变量，java用多了！！ //鱼香肉丝  表示不点这个菜了！！哈哈
-    signingConfigs {
-        release {
-            keyAlias 'coldraincn'
-            keyPassword 'handan213'
-            storePassword 'handan213'
-            storeFile file('/Users/hd/Documents/keystore.jks')
-        }
-    }
+//    signingConfigs {
+//        release {
+//            keyAlias 'coldraincn'
+//            keyPassword 'handan213'
+//            storePassword 'handan213'
+//            storeFile file('/Users/hd/Documents/keystore.jks')
+//        }
+//    }
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
 
@@ -29,7 +29,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
     }
     dataBinding {
