@@ -7,7 +7,7 @@ import android.webkit.WebView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SelectTopic extends AppCompatActivity {
+public class SelectTopicActivity extends AppCompatActivity {
 
     @BindView(R.id.selecttopic_webview)
     WebView selecttopicWebview;
@@ -17,6 +17,6 @@ public class SelectTopic extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_topic);
         ButterKnife.bind(this);
-        getSupportActionBar().hide();
+        selecttopicWebview.loadUrl("https://www.baidu.com/");
     }
 }

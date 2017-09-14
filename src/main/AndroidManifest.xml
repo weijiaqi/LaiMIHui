@@ -84,9 +84,16 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".OrderconfirmActivity" />
-        <activity android:name=".UserOrderDetailActivity" />
-        <activity android:name=".ProductDetailActivity" />
+        <activity android:name=".OrderconfirmActivity"/>
+        <activity android:name=".UserOrderDetailActivity"/>
+        <activity android:name=".ProductDetailActivity"/>
+        <activity android:name=".HaiBaoActivity"/>
+        <activity android:name=".GuangGaoActivity"/>
+        <activity android:name=".MemshipManagerActivity"/>
+        <activity android:name=".CommodityManagerActivity"/>
+        <activity android:name=".PersronStoresActivity"/>
+        <activity android:name=".NameShopActivity"/>
+        <activity android:name=".InformationActivity"/>
         <!-- alipay sdk begin -->
 
 
@@ -109,11 +116,15 @@
         <activity android:name=".ChangeMobileActivity" />
         <activity android:name=".AddressActivity" />
         <activity android:name=".AddressAddActivity" />
+        <activity android:name=".PersronStoresActivity" />
+        <activity android:name=".InformationActivity" />
+        <activity android:name=".NameShopActivity" />
         <activity
             android:name=".AddressModifyActivity"
             android:label="@string/title_activity_address_modify"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SelectTopic"></activity>
+        <activity android:name=".SelectTopic" />
+        <activity android:name=".SelectTopicActivity"></activity>
     </application>
 
 </manifest>

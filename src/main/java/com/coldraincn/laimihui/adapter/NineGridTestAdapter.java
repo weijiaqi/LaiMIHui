@@ -86,6 +86,7 @@ public class NineGridTestAdapter extends BaseAdapter implements View.OnClickList
 
 //        holder.layout.setIsShowAll(mList.get(position).isShowAll);
         holder.layout.setUrlList(mList.get(position).getImglist());
+
         final List<ListMessage.DataBean.DatalistBean.ProductListBean> productList = bean.getProductList();
         MerchandiseAdapter merchandiseAdapter = new MerchandiseAdapter(mContext, productList);
         holder.listView.setAdapter(merchandiseAdapter);
@@ -181,7 +182,7 @@ public class NineGridTestAdapter extends BaseAdapter implements View.OnClickList
         WXWebpageObject webpage = new WXWebpageObject();
         SharedPreferences settings = mContext.getSharedPreferences(PREFUSER, 0);
         String communityOid = settings.getString(PREF_CID, "");
-        webpage.webpageUrl = "http://dev.wecity.co/task/mall/dynamic/index.do?communityOid=" + communityOid;
+        webpage.webpageUrl = "http://dev.wecity.co/task/mall/dynamic/index.do?communityOid=" + mBean.getObjectId();
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title = mBean.getTitle();
         msg.description ="最新爆款动态来了，点击查看并可下单购买。";

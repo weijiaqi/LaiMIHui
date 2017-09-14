@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.coldraincn.laimihui.AddressActivity;
 import com.coldraincn.laimihui.ChangeInfoActivity;
 import com.coldraincn.laimihui.LoginActivity;
+import com.coldraincn.laimihui.ManageShopActivity;
 import com.coldraincn.laimihui.MyOrdersActivity;
 import com.coldraincn.laimihui.R;
 import com.coldraincn.laimihui.WeixinActivity;
@@ -114,6 +115,13 @@ public class NavfourFragment extends Fragment {
 
 
     }
+    @OnClick(R.id.buttonmanege)
+    public void manage() {
+        Intent intent = new Intent (getActivity(),ManageShopActivity.class);
+        startActivity(intent);
+
+
+    }
 
     public NavfourFragment() {
         // Required empty public constructor
@@ -141,13 +149,14 @@ public class NavfourFragment extends Fragment {
         if (!image.equals("")) {
             Picasso.with(getActivity()).load(image).into(circleImageview);
         }
-
+        /**
+         *
 
         textname.setText(name);
         if (role.equals("1")) {
             buttonmanege.setVisibility(View.INVISIBLE);
         }
-
+         */
 
     }
 

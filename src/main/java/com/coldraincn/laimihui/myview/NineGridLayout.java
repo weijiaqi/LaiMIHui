@@ -101,7 +101,6 @@ public abstract class NineGridLayout extends ViewGroup {
             return;
         }
         setVisibility(VISIBLE);
-
         mUrlList.clear();
         mUrlList.addAll(urlList);
 
@@ -149,7 +148,6 @@ public abstract class NineGridLayout extends ViewGroup {
 
         generateChildrenLayout(size);
         layoutParams();
-
         for (int i = 0; i < size; i++) {
             String url = mUrlList.get(i);
             RatioImageView imageView;

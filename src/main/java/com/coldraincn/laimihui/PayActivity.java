@@ -36,6 +36,12 @@ public class PayActivity extends AppCompatActivity {
     private String newPrice;
     private String payNotifyUrl;
     private String orderno;
+    private String AppId;
+    private String PartnerId;
+    private String PrepayId;
+    private String NonceStr;
+    private String TimeStamp;
+    private String Sign;
 
     @BindView(R.id.relativeLayout)
     RelativeLayout relativeLayout;
@@ -66,13 +72,13 @@ public class PayActivity extends AppCompatActivity {
                // 1.创建微信支付请求
                         WechatPayReq wechatPayReq = new WechatPayReq.Builder()
                                 .with(PayActivity.this) //activity实例
-                                .setAppId("wx3bb6d108dec83903") //微信支付AppID
-                                .setPartnerId("1488333992")//微信支付商户号
-                                .setPrepayId("wx2017091217382532dc86632a0653961178")//预支付码
+                                .setAppId(AppId) //微信支付AppID
+                                .setPartnerId(PartnerId)//微信支付商户号
+                                .setPrepayId(PrepayId)//预支付码
 								.setPackageValue("Sign=WXPay")//"Sign=WXPay"
-                                .setNonceStr("d63fbf8c3173730f82b150c5ef38b8ff")
-                                .setTimeStamp("1505209501034")//时间戳
-                                .setSign("768629B0438A0A575C4C22E5F292E0DB")//签名
+                                .setNonceStr(NonceStr)
+                                .setTimeStamp(TimeStamp)//时间戳
+                                .setSign(Sign)//签名
                                 .create();
                         //2.发送微信支付请求
                         PayAPI.getInstance().sendPayRequest(wechatPayReq);
@@ -121,6 +127,13 @@ public class PayActivity extends AppCompatActivity {
         textView8.setText(mOrder.getData().getOrderNo());
         textView10.setText(mOrder.getData().getMoney());
         payNotifyUrl=mOrder.getData().getPayNotifyUrl();
+
+        AppId=mOrder.getData().getAppid();
+        PartnerId=mOrder.getData().getMchId() ;
+        PrepayId=mOrder.getData().getPrepayId();
+        NonceStr=mOrder.getData().getNonceStr();
+        TimeStamp=mOrder.getData().getTimeStamp();
+        Sign=mOrder.getData().getPaySign();
         orderno=mOrder.getData().getOrderNo();
 
         String price = mOrder.getData().getMoney();

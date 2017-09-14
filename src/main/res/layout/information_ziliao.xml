@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/qianhui"
+    >
+    <include layout="@layout/title_main" />
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="姓名："
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
+            android:id="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/setname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="卫家琪"
+            android:background="@color/white"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/textView9"
+            android:layout_marginStart="55dp" />
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.1dp"
+        android:background="@mipmap/fengexian"
+        />
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="身份证号："
+            android:id="@+id/text"
+            android:layout_centerVertical="true"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/shenfenzhenghao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/white"
+            android:text="142730199307090355"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/text"
+            android:layout_marginStart="22dp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.1dp"
+        android:background="@mipmap/fengexian"
+        />
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="手机号码："
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
+            android:id="@+id/textView13" />
+
+        <EditText
+            android:id="@+id/phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:text="18510507182"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_alignBaseline="@+id/textView13"
+            android:layout_alignBottom="@+id/textView13"
+            android:layout_toEndOf="@+id/textView13"
+            android:layout_marginStart="18dp" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.1dp"
+        android:background="@mipmap/fengexian"
+        />
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_height="50dp">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="绑定手机："
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
+            android:id="@+id/textView14" />
+
+        <TextView
+            android:id="@+id/bind_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="18510507182"
+            android:gravity="center"
+            android:background="@color/white"
+            android:textSize="18sp"
+            android:layout_alignBaseline="@+id/textView14"
+            android:layout_alignBottom="@+id/textView14"
+            android:layout_toEndOf="@+id/textView14"
+            android:layout_marginStart="18dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

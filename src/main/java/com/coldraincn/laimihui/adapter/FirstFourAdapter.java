@@ -28,6 +28,7 @@ public class FirstFourAdapter extends RecyclerView.Adapter<FirstFourAdapter.MyVi
 
 
 
+
     public FirstFourAdapter(Context context, List<Map<String, Object>> listItems
     ) {
         mContext = context;

@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.coldraincn.laimihui.ProductDetailActivity;
 import com.coldraincn.laimihui.R;
+import com.coldraincn.laimihui.SelectTopicActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -75,7 +75,7 @@ public class FirstFiveAdapter extends RecyclerView.Adapter<FirstFiveAdapter.MyVi
                 public void onClick(View v) {
 
 
-                    Intent intent = new Intent(mAdapter.mContext, ProductDetailActivity.class);
+                    Intent intent = new Intent(mAdapter.mContext, SelectTopicActivity.class);
                     Bundle bundle = new Bundle();
 
                     bundle.putString("productOid",productOid);

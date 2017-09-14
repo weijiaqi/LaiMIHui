@@ -9,10 +9,9 @@ import java.io.Serializable;
 public class createOrder implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
     /**
      * status : OK
-     * data : {"appid":"wx3bb6d108dec83903","body":"补拍邮费","money":"10.1","nonceStr":"b294504229c668e750dfcc4ea9617f0a","orderNo":"1505202225894","payNotifyUrl":"http://api.17yun.com.cn/mall/order/aliPayNotify.do","paySign":"81519B699E635A565343A4238DE41931","prepayId":"wx20170912153713f072c15b6c0072182258","receiverAddress":"北京市海淀区中关村南大街","receiverName":"赵宝","receiverPhoneNo":"13522890823","timeStamp":"1505202228405"}
+     * data : {"appid":"wx3bb6d108dec83903","body":"补拍邮费","mchId":"1488333992","money":"10.1","nonceStr":"2ab56412b1163ee131e1246da0955bd1","orderNo":"1505376968004","payNotifyUrl":"http://api.17yun.com.cn/order/aliPayNotify.do","paySign":"103015D8F31D628B558D16D991B0391C","prepayId":"wx201709141609331e8a5be43f0143308266","receiverAddress":"北京市海淀区中关村南大街","receiverName":"赵宝","receiverPhoneNo":"13522890823","timeStamp":"1505376968"}
      */
 
     private String status;
@@ -34,25 +33,26 @@ public class createOrder implements Serializable {
         this.data = data;
     }
 
-    public static class DataBean implements Serializable{
-        private static final long serialVersionUID = 1L;
+    public static class DataBean {
         /**
          * appid : wx3bb6d108dec83903
          * body : 补拍邮费
+         * mchId : 1488333992
          * money : 10.1
-         * nonceStr : b294504229c668e750dfcc4ea9617f0a
-         * orderNo : 1505202225894
-         * payNotifyUrl : http://api.17yun.com.cn/mall/order/aliPayNotify.do
-         * paySign : 81519B699E635A565343A4238DE41931
-         * prepayId : wx20170912153713f072c15b6c0072182258
+         * nonceStr : 2ab56412b1163ee131e1246da0955bd1
+         * orderNo : 1505376968004
+         * payNotifyUrl : http://api.17yun.com.cn/order/aliPayNotify.do
+         * paySign : 103015D8F31D628B558D16D991B0391C
+         * prepayId : wx201709141609331e8a5be43f0143308266
          * receiverAddress : 北京市海淀区中关村南大街
          * receiverName : 赵宝
          * receiverPhoneNo : 13522890823
-         * timeStamp : 1505202228405
+         * timeStamp : 1505376968
          */
 
         private String appid;
         private String body;
+        private String mchId;
         private String money;
         private String nonceStr;
         private String orderNo;
@@ -78,6 +78,14 @@ public class createOrder implements Serializable {
 
         public void setBody(String body) {
             this.body = body;
+        }
+
+        public String getMchId() {
+            return mchId;
+        }
+
+        public void setMchId(String mchId) {
+            this.mchId = mchId;
         }
 
         public String getMoney() {
